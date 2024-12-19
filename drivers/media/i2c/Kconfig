@@ -99,6 +99,85 @@ config VIDEO_HI847
           To compile this driver as a module, choose M here: the
           module will be called hi847.
 
+config VIDEO_MIRA220
+	tristate "ams MIRA220 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA220 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira220.
+
+config VIDEO_MIRA220COLOR
+	tristate "ams MIRA220 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA220 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira220.
+
+config VIDEO_MIRA050
+	tristate "ams MIRA050 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA050 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira050.
+
+config VIDEO_MIRA050COLOR
+	tristate "ams MIRA050 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA050 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira050.
+
+config VIDEO_MIRA016
+	tristate "ams MIRA016 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA016 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira016.
+
+config VIDEO_MIRA130
+	tristate "ams MIRA130 sensor support"
+	depends on I2C && VIDEO_DEV
+	select MEDIA_CONTROLLER
+	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_FWNODE
+	help
+	  This is a Video4Linux2 sensor driver for the ams
+	  MIRA130 camera.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called mira130.
+
+
 config VIDEO_IMX208
 	tristate "Sony IMX208 sensor support"
 	help

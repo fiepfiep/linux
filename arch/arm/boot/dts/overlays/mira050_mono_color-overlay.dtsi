@@ -1,0 +1,118 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Definitions for MIRA050 camera module on VC I2C bus
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+
+/{
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&i2c0if>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	clk_frag: fragment@1 {
+		target = <&cam1_clk>;
+		__overlay__ {
+			status = "okay";
+			clock-frequency = <24000000>;
+		};
+	};
+
+	fragment@2 {
+		target = <&i2c0mux>;
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target = <&cam1_reg>;
+		__overlay__ {
+			status = "okay";
+			regulator-name = "mira050_vana";
+			regulator-min-microvolt = <2800000>;
+			regulator-max-microvolt = <2800000>;
+		};
+	};
+
+	i2c_frag: fragment@100 {
+		target = <&i2c_csi_dsi>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+
+			mira050: mira050@36 {
+				// compatible = "ams,mira050";
+				// I2C addresses (7-bit address)
+				// The interface board uses 0x36 by default
+				// MIRA050CSP: 0x36; PMIC: 0x2D; INA3221: 0x40; LM2759: 0x53;
+				// dsPIC33EP32MC503: 0x0A
+				reg = <0x36>;
+				// reg-names = "mira050";
+				status = "okay";
+
+				//clocks = <&mira050_clk>;
+				clocks = <&cam1_clk>;
+				clock-names = "xclk";
+
+				// TODO(jalv): Add here camera supplies based on the
+				// TPS65912 pmic.
+				VANA-supply = <&cam1_reg>;	/* 2.8v */
+				VDIG-supply = <&cam_dummy_reg>;	/* 1.8v */
+				VDDL-supply = <&cam_dummy_reg>;	/* 1.2v */
+
+				// FIXME(jalv): Make sure orientation is correct
+				rotation = <0>;
+				orientation = <2>;
+				skip-reg-upload = <0>;
+
+				port {
+					mira050_0: endpoint {
+						remote-endpoint = <&csi_ep>;
+						clock-lanes = <0>;
+						data-lanes = <1>;
+						clock-noncontinuous;
+						link-frequencies =
+							/bits/ 64 <456000000>;
+					};
+				};
+	
+			};
+		};
+	};
+
+	csi_frag: fragment@101 {
+		target = <&csi1>;
+		csi: __overlay__ {
+			status = "okay";
+			brcm,media-controller;
+
+			port {
+				csi_ep: endpoint {
+					remote-endpoint = <&mira050_0>;
+					clock-lanes = <0>;
+					data-lanes = <1>;
+					clock-noncontinuous;
+				};
+			};
+		};
+	};
+
+	__overrides__ {
+		rotation = <&mira050>,"rotation:0";
+		orientation = <&mira050>,"orientation:0";
+		skip-reg-upload = <&mira050>,"skip-reg-upload:0";
+		media-controller = <&csi>,"brcm,media-controller?";
+		cam0 = <&i2c_frag>, "target:0=",<&i2c_csi_dsi0>,
+		       <&csi_frag>, "target:0=",<&csi0>,
+		       <&clk_frag>, "target:0=",<&cam0_clk>,
+		       <&mira050>, "clocks:0=",<&cam0_clk>,
+		       <&mira050>, "VANA-supply:0=",<&cam0_reg>;
+	};
+};

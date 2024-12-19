@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: GPL-2.0-only
+// Definitions for MIRA130 camera module on VC I2C bus
+/dts-v1/;
+/plugin/;
+
+#include <dt-bindings/gpio/gpio.h>
+#include "mira130_mono_color-overlay.dtsi"
+
+&mira130 {
+        compatible = "ams,mira130";
+	reg-name = "mira130";
+};
+
