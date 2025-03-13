@@ -21,9 +21,9 @@ cam_node: mira220@10 {
 	clocks = <&cam1_clk>;
 	clock-names = "xclk";
 
-	VANA-supply = <&cam1_reg>;	/* 2.8v */
-	VDIG-supply = <&cam_dummy_reg>;	/* 1.8v */
-	VDDL-supply = <&cam_dummy_reg>;	/* 1.2v */
+	vana-supply = <&cam1_reg>;	/* 2.8v */
+	vdig-supply = <&cam_dummy_reg>;	/* 1.8v */
+	vddl-supply = <&cam_dummy_reg>;	/* 1.2v */
 
 	rotation = <0>;
 	orientation = <2>;
@@ -34,7 +34,7 @@ cam_node: mira220@10 {
 			data-lanes = <1 2>;
 			// clock-noncontinuous;
 			link-frequencies =
-				/bits/ 64 <456000000>;
+				/bits/ 64 <750000000>;
 		};
 	};
 };

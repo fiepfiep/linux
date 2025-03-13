@@ -155,6 +155,7 @@ config VIDEO_MIRA220
 	select MEDIA_CONTROLLER
 	select VIDEO_V4L2_SUBDEV_API
 	select V4L2_FWNODE
+	select V4L2_CCI_I2C
 	help
 	  This is a Video4Linux2 sensor driver for the ams
 	  MIRA220 camera.
