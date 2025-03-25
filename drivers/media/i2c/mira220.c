@@ -21,7 +21,7 @@
  #include <media/v4l2-event.h>
  #include <media/v4l2-fwnode.h>
  #include <media/v4l2-mediabus.h>
- 
+ #include <media/v4l2-cci.h>
  #include <linux/unaligned.h>
  
  /*
@@ -79,6 +79,8 @@
  // Exposure time is indicated in number of rows
  #define MIRA220_EXP_TIME_LO_REG			0x100C
  #define MIRA220_EXP_TIME_HI_REG			0x100D
+ #define MIRA220_EXP_TIME_LO_REG_NEW			CCI_REG8(0x100C)
+ #define MIRA220_EXP_TIME_HI_REG_NEW			CCI_REG8(0x100D)
  
  // VBLANK is indicated in number of rows
  #define MIRA220_VBLANK_LO_REG			0x1012
@@ -2987,6 +2989,7 @@ static const struct mira220_reg full_400_400_250fps_12b_2lanes_reg[] = {
 
 	 /* User specified I2C device address */
 	 u32 tbd_client_i2c_addr;
+	 struct regmap *regmap;
  
  };
  
@@ -4192,7 +4195,8 @@ static const struct mira220_reg full_400_400_250fps_12b_2lanes_reg[] = {
 	 struct device *dev = &client->dev;
 	 struct mira220 *mira220;
 	 int ret;
- 
+	 u64 readval;
+
 	 printk(KERN_INFO "[MIRA220]: probing v4l2 sensor.\n");
 	 printk(KERN_INFO "[MIRA220]: Driver Version 0.0.\n");
  
@@ -4203,7 +4207,8 @@ static const struct mira220_reg full_400_400_250fps_12b_2lanes_reg[] = {
 		 return -ENOMEM;
  
 	 v4l2_i2c_subdev_init(&mira220->sd, client, &mira220_subdev_ops);
- 
+	 mira220->regmap = devm_cci_regmap_init_i2c(client, 16);
+
 	 /* Check the hardware configuration in device tree */
 	 if (mira220_check_hwcfg(dev))
 		 return -EINVAL;
@@ -4231,7 +4236,6 @@ static const struct mira220_reg full_400_400_250fps_12b_2lanes_reg[] = {
 		 dev_err(dev, "failed to get regulators\n");
 		 return ret;
 	 }
- 
 
  
 	 usleep_range(1000000, 1000000+100);
@@ -4252,6 +4256,12 @@ static const struct mira220_reg full_400_400_250fps_12b_2lanes_reg[] = {
  
 	 printk(KERN_INFO "[MIRA220]: Setting support function.\n");
  
+	 /*test cci write*/
+	 ret = cci_write(mira220->regmap, MIRA220_EXP_TIME_LO_REG_NEW,
+		0xAA, NULL);
+	 ret = cci_read(mira220->regmap,MIRA220_EXP_TIME_LO_REG_NEW, &readval, NULL );
+	 printk(KERN_INFO "[MIRA220]: NEW Read reg 0x%4.4x, val = 0x%x.\n",
+		MIRA220_EXP_TIME_LO_REG_NEW, readval);
 	 /* Set default mode to max resolution */
 	 mira220->mode = &supported_modes[0];
  

@@ -154,6 +154,7 @@ config VIDEO_MIRA220
 	depends on I2C && VIDEO_DEV
 	select MEDIA_CONTROLLER
 	select VIDEO_V4L2_SUBDEV_API
+	select V4L2_CCI_I2C
 	select V4L2_FWNODE
 	help
 	  This is a Video4Linux2 sensor driver for the ams
