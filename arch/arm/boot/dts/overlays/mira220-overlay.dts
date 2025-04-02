@@ -52,7 +52,7 @@
 					remote-endpoint = <&cam_endpoint>;
 					clock-lanes = <0>;
 					data-lanes = <1 2>;
-					// clock-noncontinuous; // mira220 reg seq use continous clk
+					// clock-noncontinuous; // mira220 reg seq use continuous clk
 				};
 			};
 		};

@@ -122,7 +122,7 @@
  // MIRA220_ROW_TIME_640x480_1000GBS_US=(450*26.04/1000)=11.7us
  
  /* Should match device tree link freq */
- #define MIRA220_DEFAULT_LINK_FREQ	456000000
+ #define MIRA220_DEFAULT_LINK_FREQ	750000000
  
  /* Trick the libcamera with achievable fps via hblank */
  
