@@ -132,7 +132,6 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	i2s-gpio28-31.dtbo \
 	i2s-master-dac.dtbo \
 	ilitek251x.dtbo \
-	mira220.dtbo \
 	imx219.dtbo \
 	imx258.dtbo \
 	imx290.dtbo \
@@ -187,6 +186,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	minipitft13.dtbo \
 	miniuart-bt.dtbo \
 	mipi-dbi-spi.dtbo \
+	mira220.dtbo \
 	mlx90640.dtbo \
 	mmc.dtbo \
 	mz61581.dtbo \
