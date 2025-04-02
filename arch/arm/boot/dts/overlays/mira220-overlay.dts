@@ -58,6 +58,13 @@
 		};
 	};
 
+	fragment@102 {
+		target = <&csi1>;
+		__dormant__ {
+			compatible = "brcm,bcm2835-unicam-legacy";
+		};
+	};
+
 
 	__overrides__ {
 		rotation = <&cam_node>,"rotation:0";
