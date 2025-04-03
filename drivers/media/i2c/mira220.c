@@ -193,852 +193,850 @@ struct mira220_mode {
 };
 
 static const struct cci_reg_sequence full_1600_1400_1500_12b_2lanes_reg_new[] = {
-	{ CCI_REG8(0x1003), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x6006), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x6012), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x6013), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x6006), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x205D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x2063), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x24DC), 0x13 }, //,Initial Upload
-	{ CCI_REG8(0x24DD), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x24DE), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x24DF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x4006), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x401C), 0x6F }, //,Initial Upload
-	{ CCI_REG8(0x204B), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x205B), 0x64 }, //,Initial Upload
-	{ CCI_REG8(0x205C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x4018), 0x3F }, //,Initial Upload
-	{ CCI_REG8(0x403B), 0xB }, //,Initial Upload
-	{ CCI_REG8(0x403E), 0xE }, //,Initial Upload
-	{ CCI_REG8(0x402B), 0x6 }, //,Initial Upload
-	{ CCI_REG8(0x401E), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x4038), 0x3B }, //,Initial Upload
-	{ CCI_REG8(0x1077), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x1078), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x1009), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x100A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x110F), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x1110), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x1006), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x402C), 0x64 }, //,Initial Upload
-	{ CCI_REG8(0x3064), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3065), 0xF0 }, //,Initial Upload
-	{ CCI_REG8(0x4013), 0x13 }, //,Initial Upload
-	{ CCI_REG8(0x401F), 0x9 }, //,Initial Upload
-	{ CCI_REG8(0x4020), 0x13 }, //,Initial Upload
-	{ CCI_REG8(0x4044), 0x75 }, //,Initial Upload
-	{ CCI_REG8(0x4027), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3215), 0x69 }, //,Initial Upload
-	{ CCI_REG8(0x3216), 0xF }, //,Initial Upload
-	{ CCI_REG8(0x322B), 0x69 }, //,Initial Upload
-	{ CCI_REG8(0x322C), 0xF }, //,Initial Upload
-	{ CCI_REG8(0x4051), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x4052), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x4057), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x4058), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3212), 0x59 }, //,Initial Upload
-	{ CCI_REG8(0x4047), 0x8F }, //,Initial Upload
-	{ CCI_REG8(0x4026), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x4032), 0x53 }, //,Initial Upload
-	{ CCI_REG8(0x4036), 0x17 }, //,Initial Upload
-	{ CCI_REG8(0x50B8), 0xF4 }, //,Initial Upload
-	{ CCI_REG8(0x3016), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3017), 0x2C }, //,Initial Upload
-	{ CCI_REG8(0x3018), 0x8C }, //,Initial Upload
-	{ CCI_REG8(0x3019), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x301A), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3013), 0xA }, //,Initial Upload
-	{ CCI_REG8(0x301B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x301C), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x301D), 0x88 }, //,Initial Upload
-	{ CCI_REG8(0x301E), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x301F), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3020), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3021), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x3022), 0x88 }, //,Initial Upload
-	{ CCI_REG8(0x3023), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x3024), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3025), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3026), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x3027), 0x88 }, //,Initial Upload
-	{ CCI_REG8(0x3028), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x3029), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x302F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3056), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3057), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3300), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3301), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3302), 0xB0 }, //,Initial Upload
-	{ CCI_REG8(0x3303), 0xB0 }, //,Initial Upload
-	{ CCI_REG8(0x3304), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3305), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3306), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3307), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3308), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3309), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x330A), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x330B), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x330C), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x330D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x330E), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x330F), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3310), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3311), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3312), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3313), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3314), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3315), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3316), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3317), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3318), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3319), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x331A), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x331B), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x331C), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x331D), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x331E), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x331F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3320), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3321), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3322), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3323), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3324), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3325), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3326), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3327), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3328), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3329), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x332A), 0x2B }, //,Initial Upload
-	{ CCI_REG8(0x332B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x332C), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x332D), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x332E), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x332F), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3330), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3331), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3332), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3333), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3334), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3335), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3058), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x3059), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x305A), 0x9 }, //,Initial Upload
-	{ CCI_REG8(0x305B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3336), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3337), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3338), 0x90 }, //,Initial Upload
-	{ CCI_REG8(0x3339), 0xB0 }, //,Initial Upload
-	{ CCI_REG8(0x333A), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x333B), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x333C), 0x1F }, //,Initial Upload
-	{ CCI_REG8(0x333D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x333E), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x333F), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3340), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3341), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3342), 0x52 }, //,Initial Upload
-	{ CCI_REG8(0x3343), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3344), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3345), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x3346), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3347), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3348), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3349), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x334A), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x334B), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x334C), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x334D), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x334E), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x334F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3350), 0x50 }, //,Initial Upload
-	{ CCI_REG8(0x3351), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3352), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3353), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x3354), 0x18 }, //,Initial Upload
-	{ CCI_REG8(0x3355), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3356), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3357), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3358), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3359), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x335A), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x335B), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x335C), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x335D), 0xC4 }, //,Initial Upload
-	{ CCI_REG8(0x335E), 0x14 }, //,Initial Upload
-	{ CCI_REG8(0x335F), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x3360), 0xA5 }, //,Initial Upload
-	{ CCI_REG8(0x3361), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3362), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3363), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3364), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3365), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x3366), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3367), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3368), 0x90 }, //,Initial Upload
-	{ CCI_REG8(0x3369), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x336A), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x336B), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x336C), 0x12 }, //,Initial Upload
-	{ CCI_REG8(0x336D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x336E), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x336F), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3370), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3371), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3372), 0x32 }, //,Initial Upload
-	{ CCI_REG8(0x3373), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3374), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3375), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3376), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3377), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3378), 0x26 }, //,Initial Upload
-	{ CCI_REG8(0x3379), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x337A), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x337B), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x337C), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x337D), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x337E), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x337F), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x3380), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3381), 0xC4 }, //,Initial Upload
-	{ CCI_REG8(0x3382), 0x14 }, //,Initial Upload
-	{ CCI_REG8(0x3383), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3384), 0xA9 }, //,Initial Upload
-	{ CCI_REG8(0x3385), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3386), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3387), 0x84 }, //,Initial Upload
-	{ CCI_REG8(0x3388), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3389), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x338A), 0x41 }, //,Initial Upload
-	{ CCI_REG8(0x338B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x338C), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x338D), 0x80 }, //,Initial Upload
-	{ CCI_REG8(0x338E), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x338F), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3390), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x3391), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3392), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3393), 0xA0 }, //,Initial Upload
-	{ CCI_REG8(0x3394), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x3395), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x305C), 0x18 }, //,Initial Upload
-	{ CCI_REG8(0x305D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x305E), 0x19 }, //,Initial Upload
-	{ CCI_REG8(0x305F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3396), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x3397), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3398), 0x90 }, //,Initial Upload
-	{ CCI_REG8(0x3399), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x339A), 0x56 }, //,Initial Upload
-	{ CCI_REG8(0x339B), 0x57 }, //,Initial Upload
-	{ CCI_REG8(0x339C), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x339D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x339E), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x339F), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33A0), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33A1), 0x17 }, //,Initial Upload
-	{ CCI_REG8(0x33A2), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33A3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33A4), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33A5), 0x28 }, //,Initial Upload
-	{ CCI_REG8(0x33A6), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33A7), 0x17 }, //,Initial Upload
-	{ CCI_REG8(0x33A8), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x33A9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33AA), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33AB), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33AC), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33AD), 0x17 }, //,Initial Upload
-	{ CCI_REG8(0x33AE), 0x61 }, //,Initial Upload
-	{ CCI_REG8(0x33AF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33B0), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33B1), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33B2), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33B3), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x33B4), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33B5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33B6), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33B7), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33B8), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33B9), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x33BA), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33BB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33BC), 0x50 }, //,Initial Upload
-	{ CCI_REG8(0x33BD), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33BE), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33BF), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x33C0), 0x2C }, //,Initial Upload
-	{ CCI_REG8(0x33C1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33C2), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33C3), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33C4), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33C5), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x33C6), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33C7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33C8), 0x90 }, //,Initial Upload
-	{ CCI_REG8(0x33C9), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33CA), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33CB), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x33CC), 0x83 }, //,Initial Upload
-	{ CCI_REG8(0x33CD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33CE), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33CF), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33D0), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33D1), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x33D2), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33D3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33D4), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33D5), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x33D6), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33D7), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x33D8), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33D9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33DA), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33DB), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33DC), 0xD6 }, //,Initial Upload
-	{ CCI_REG8(0x33DD), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x33DE), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x33DF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33E0), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33E1), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33E2), 0x56 }, //,Initial Upload
-	{ CCI_REG8(0x33E3), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x33E4), 0x7 }, //,Initial Upload
-	{ CCI_REG8(0x33E5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x33E6), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x33E7), 0x20 }, //,Initial Upload
-	{ CCI_REG8(0x33E8), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x33E9), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x3060), 0x26 }, //,Initial Upload
-	{ CCI_REG8(0x3061), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x302A), 0xFF }, //,Initial Upload
-	{ CCI_REG8(0x302B), 0xFF }, //,Initial Upload
-	{ CCI_REG8(0x302C), 0xFF }, //,Initial Upload
-	{ CCI_REG8(0x302D), 0xFF }, //,Initial Upload
-	{ CCI_REG8(0x302E), 0x3F }, //,Initial Upload
-	{ CCI_REG8(0x3013), 0xB }, //,Initial Upload
-	{ CCI_REG8(0x102B), 0x2C }, //,Initial Upload
-	{ CCI_REG8(0x102C), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x1035), 0x54 }, //,Initial Upload
-	{ CCI_REG8(0x1036), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3090), 0x2A }, //,Initial Upload
-	{ CCI_REG8(0x3091), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x30C6), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30C7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30CF), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30D0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F3), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30F4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D8), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30D9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E1), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30E2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F3), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30F4), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x30F5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F6), 0x17 }, //,Initial Upload
-	{ CCI_REG8(0x30F7), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x30F8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30D8), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x30D9), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x30DA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DB), 0x19 }, //,Initial Upload
-	{ CCI_REG8(0x30DC), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x30DD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30DF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30E0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A2), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30A3), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x30A4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A5), 0x22 }, //,Initial Upload
-	{ CCI_REG8(0x30A6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30AA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30AB), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30AC), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x30AD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30AE), 0x22 }, //,Initial Upload
-	{ CCI_REG8(0x30AF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30BD), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30BE), 0x9F }, //,Initial Upload
-	{ CCI_REG8(0x30BF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C0), 0x7D }, //,Initial Upload
-	{ CCI_REG8(0x30C1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30C5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B4), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x30B5), 0x9C }, //,Initial Upload
-	{ CCI_REG8(0x30B6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B7), 0x7D }, //,Initial Upload
-	{ CCI_REG8(0x30B8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30B9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30BA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30BB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30BC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FC), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x30FD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30FF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3100), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3101), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3102), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3103), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3104), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3105), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3106), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3107), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3108), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3109), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x310A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x310B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x310C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x310D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3099), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x309A), 0x96 }, //,Initial Upload
-	{ CCI_REG8(0x309B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x309C), 0x6 }, //,Initial Upload
-	{ CCI_REG8(0x309D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x309E), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x309F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30A1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x310E), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x310F), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x3110), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3111), 0x2B }, //,Initial Upload
-	{ CCI_REG8(0x3112), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3113), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3114), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3115), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3116), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3117), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3118), 0x2 }, //,Initial Upload
-	{ CCI_REG8(0x3119), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x311A), 0x2C }, //,Initial Upload
-	{ CCI_REG8(0x311B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x311C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x311D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x311E), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x311F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30EA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30EB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30EC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30ED), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30EE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30EF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x30F2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x313B), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x313C), 0x31 }, //,Initial Upload
-	{ CCI_REG8(0x313D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x313E), 0x7 }, //,Initial Upload
-	{ CCI_REG8(0x313F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3140), 0x68 }, //,Initial Upload
-	{ CCI_REG8(0x3141), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3142), 0x34 }, //,Initial Upload
-	{ CCI_REG8(0x3143), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31A0), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x31A1), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x31A2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31A3), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31A4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31A5), 0x7E }, //,Initial Upload
-	{ CCI_REG8(0x31A6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31A7), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31A8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31A9), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x31AA), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x31AB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31AC), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31AD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31AE), 0x7E }, //,Initial Upload
-	{ CCI_REG8(0x31AF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31B0), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31B1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31B2), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x31B3), 0x16 }, //,Initial Upload
-	{ CCI_REG8(0x31B4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31B5), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31B6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31B7), 0x7E }, //,Initial Upload
-	{ CCI_REG8(0x31B8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31B9), 0x8 }, //,Initial Upload
-	{ CCI_REG8(0x31BA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3120), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3121), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x3122), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3123), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x3124), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3125), 0xA9 }, //,Initial Upload
-	{ CCI_REG8(0x3126), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3127), 0x6D }, //,Initial Upload
-	{ CCI_REG8(0x3128), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3129), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x312A), 0x15 }, //,Initial Upload
-	{ CCI_REG8(0x312B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x312C), 0xA }, //,Initial Upload
-	{ CCI_REG8(0x312D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x312E), 0x45 }, //,Initial Upload
-	{ CCI_REG8(0x312F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3130), 0x1D }, //,Initial Upload
-	{ CCI_REG8(0x3131), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3132), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3133), 0x7D }, //,Initial Upload
-	{ CCI_REG8(0x3134), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3135), 0xA }, //,Initial Upload
-	{ CCI_REG8(0x3136), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3137), 0xA9 }, //,Initial Upload
-	{ CCI_REG8(0x3138), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3139), 0x6D }, //,Initial Upload
-	{ CCI_REG8(0x313A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3144), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3145), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3146), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3147), 0x30 }, //,Initial Upload
-	{ CCI_REG8(0x3148), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3149), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x314A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x314B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x314C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x314D), 0x3 }, //,Initial Upload
-	{ CCI_REG8(0x314E), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x314F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3150), 0x31 }, //,Initial Upload
-	{ CCI_REG8(0x3151), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3152), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3153), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3154), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3155), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31D8), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31D9), 0x3A }, //,Initial Upload
-	{ CCI_REG8(0x31DA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31DB), 0x2E }, //,Initial Upload
-	{ CCI_REG8(0x31DC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31DD), 0x9E }, //,Initial Upload
-	{ CCI_REG8(0x31DE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31DF), 0x7E }, //,Initial Upload
-	{ CCI_REG8(0x31E0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31E1), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31E2), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31E3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31E4), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31E5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31E6), 0x73 }, //,Initial Upload
-	{ CCI_REG8(0x31E7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31E8), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31E9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31EA), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31EB), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31EC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31ED), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31EE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31EF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F0), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F1), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F3), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F4), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F6), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31F9), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31FA), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31FB), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31FC), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31FD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31FE), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31FF), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3200), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3201), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3202), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3203), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3204), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3205), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3206), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3207), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3208), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3209), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x320A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x320B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3164), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3165), 0x14 }, //,Initial Upload
-	{ CCI_REG8(0x3166), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3167), 0xC }, //,Initial Upload
-	{ CCI_REG8(0x3168), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3169), 0x44 }, //,Initial Upload
-	{ CCI_REG8(0x316A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x316B), 0x1F }, //,Initial Upload
-	{ CCI_REG8(0x316C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x316D), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x316E), 0x7C }, //,Initial Upload
-	{ CCI_REG8(0x316F), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3170), 0xC }, //,Initial Upload
-	{ CCI_REG8(0x3171), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3172), 0xA8 }, //,Initial Upload
-	{ CCI_REG8(0x3173), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3174), 0x6F }, //,Initial Upload
-	{ CCI_REG8(0x3175), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31C4), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31C5), 0x24 }, //,Initial Upload
-	{ CCI_REG8(0x31C6), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x31C7), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31C8), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31C9), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31CA), 0x24 }, //,Initial Upload
-	{ CCI_REG8(0x31CB), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x31CC), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31CD), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31CE), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31CF), 0x24 }, //,Initial Upload
-	{ CCI_REG8(0x31D0), 0x1 }, //,Initial Upload
-	{ CCI_REG8(0x31D1), 0x4 }, //,Initial Upload
-	{ CCI_REG8(0x31D2), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31D3), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x31D4), 0x73 }, //,Initial Upload
-	{ CCI_REG8(0x31D5), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x31D6), 0xB1 }, //,Initial Upload
-	{ CCI_REG8(0x31D7), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3176), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3177), 0x10 }, //,Initial Upload
-	{ CCI_REG8(0x3178), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3179), 0x56 }, //,Initial Upload
-	{ CCI_REG8(0x317A), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x317B), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x317C), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x317D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x317E), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x317F), 0x5 }, //,Initial Upload
-	{ CCI_REG8(0x3180), 0x6A }, //,Initial Upload
-	{ CCI_REG8(0x3181), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3182), 0xAD }, //,Initial Upload
-	{ CCI_REG8(0x3183), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3184), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3185), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3186), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x3187), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x100C), 0x7E }, //,Initial Upload
-	{ CCI_REG8(0x100D), 0x0 }, //,Initial Upload
-	{ CCI_REG8(0x1012), 0xDF }, //,Initial Upload
-	{ CCI_REG8(0x1013), 0x2B }, //,Initial Upload
-	{ CCI_REG8(0x1002), 0x4 }, //,Initial Upload
-	//CCI_REG8(/ ){0x1003,0x10}, //,Sensor Control Mode.IMAGER_STATE(0)
-	{ CCI_REG8(0x0043), 0x0 }, //,Sensor Control Mode.SLEEP_POWER_MODE(0)
-	{ CCI_REG8(0x0043), 0x0 }, //,Sensor Control Mode.IDLE_POWER_MODE(0)
-	{ CCI_REG8(0x0043), 0x4 }, //,Sensor Control Mode.SYSTEM_CLOCK_ENABLE(0)
-	{ CCI_REG8(0x0043), 0xC }, //,Sensor Control Mode.SRAM_CLOCK_ENABLE(0)
-	{ CCI_REG8(0x1002), 0x4 }, //,Sensor Control Mode.IMAGER_RUN_CONT(0)
-	{ CCI_REG8(0x1001), 0x41 }, //,Sensor Control Mode.EXT_EVENT_SEL(0)
-	{ CCI_REG8(0x10F2), 0x1 }, //,Sensor Control Mode.NB_OF_FRAMES_A(0)
-	{ CCI_REG8(0x10F3), 0x0 }, //,Sensor Control Mode.NB_OF_FRAMES_A(1)
-	{ CCI_REG8(0x1111), 0x1 }, //,Sensor Control Mode.NB_OF_FRAMES_B(0)
-	{ CCI_REG8(0x1112), 0x0 }, //,Sensor Control Mode.NB_OF_FRAMES_B(1)
-	{ CCI_REG8(0x0012), 0x0 }, //,IO Drive Strength.DIG_DRIVE_STRENGTH(0)
-	{ CCI_REG8(0x0012), 0x0 }, //,IO Drive Strength.CCI_DRIVE_STRENGTH(0)
-	{ CCI_REG8(0x1001), 0x41 }, //,Readout && Exposure.EXT_EXP_PW_SEL(0)
-	{ CCI_REG8(0x10D0), 0x0 }, //,Readout && Exposure.EXT_EXP_PW_DELAY(0)
-	{ CCI_REG8(0x10D1), 0x0 }, //,Readout && Exposure.EXT_EXP_PW_DELAY(1)
-	{ CCI_REG8(0x1012), 0x91 }, //,Readout && Exposure.VBLANK_A(0)
-	{ CCI_REG8(0x1013), 0xD }, //,Readout && Exposure.VBLANK_A(1)
-	{ CCI_REG8(0x1103), 0x91 }, //,Readout && Exposure.VBLANK_B(0)
-	{ CCI_REG8(0x1104), 0xD }, //,Readout && Exposure.VBLANK_B(1)
-	{ CCI_REG8(0x100C), 0x80 }, //,Readout && Exposure.EXP_TIME_A(0)
-	{ CCI_REG8(0x100D), 0x0 }, //,Readout && Exposure.EXP_TIME_A(1)
-	{ CCI_REG8(0x1115), 0x80 }, //,Readout && Exposure.EXP_TIME_B(0)
-	{ CCI_REG8(0x1116), 0x0 }, //,Readout && Exposure.EXP_TIME_B(1)
-	{ CCI_REG8(0x102B), 0x30 }, //,Readout && Exposure.ROW_LENGTH_A(0)
-	{ CCI_REG8(0x102C), 0x1 }, //,Readout && Exposure.ROW_LENGTH_A(1)
-	{ CCI_REG8(0x1113), 0x30 }, //,Readout && Exposure.ROW_LENGTH_B(0)
-	{ CCI_REG8(0x1114), 0x1 }, //,Readout && Exposure.ROW_LENGTH_B(1)
-	{ CCI_REG8(0x2008), 0x20 }, //,Horizontal ROI.HSIZE_A(0)
-	{ CCI_REG8(0x2009), 0x3 }, //,Horizontal ROI.HSIZE_A(1)
-	{ CCI_REG8(0x2098), 0x20 }, //,Horizontal ROI.HSIZE_B(0)
-	{ CCI_REG8(0x2099), 0x3 }, //,Horizontal ROI.HSIZE_B(1)
-	{ CCI_REG8(0x200A), 0x0 }, //,Horizontal ROI.HSTART_A(0)
-	{ CCI_REG8(0x200B), 0x0 }, //,Horizontal ROI.HSTART_A(1)
-	{ CCI_REG8(0x209A), 0x0 }, //,Horizontal ROI.HSTART_B(0)
-	{ CCI_REG8(0x209B), 0x0 }, //,Horizontal ROI.HSTART_B(1)
-	{ CCI_REG8(0x207D), 0x40 }, //,Horizontal ROI.MIPI_HSIZE(0)
-	{ CCI_REG8(0x207E), 0x6 }, //,Horizontal ROI.MIPI_HSIZE(1)
-	{ CCI_REG8(0x107D), 0x0 }, //,Vertical ROI.VSTART0_A(0)
-	{ CCI_REG8(0x107E), 0x0 }, //,Vertical ROI.VSTART0_A(1)
-	{ CCI_REG8(0x1087), 0x78 }, //,Vertical ROI.VSIZE0_A(0)
-	{ CCI_REG8(0x1088), 0x5 }, //,Vertical ROI.VSIZE0_A(1)
-	{ CCI_REG8(0x1105), 0x0 }, //,Vertical ROI.VSTART0_B(0)
-	{ CCI_REG8(0x1106), 0x0 }, //,Vertical ROI.VSTART0_B(1)
-	{ CCI_REG8(0x110A), 0x78 }, //,Vertical ROI.VSIZE0_B(0)
-	{ CCI_REG8(0x110B), 0x5 }, //,Vertical ROI.VSIZE0_B(1)
-	{ CCI_REG8(0x107D), 0x0 }, //,Vertical ROI.VSTART1_A(0)
-	{ CCI_REG8(0x107E), 0x0 }, //,Vertical ROI.VSTART1_A(1)
-	{ CCI_REG8(0x107F), 0x0 }, //,Vertical ROI.VSTART1_A(2)
-	{ CCI_REG8(0x1087), 0x78 }, //,Vertical ROI.VSIZE1_A(0)
-	{ CCI_REG8(0x1088), 0x5 }, //,Vertical ROI.VSIZE1_A(1)
-	{ CCI_REG8(0x1089), 0x0 }, //,Vertical ROI.VSIZE1_A(2)
-	{ CCI_REG8(0x1105), 0x0 }, //,Vertical ROI.VSTART1_B(0)
-	{ CCI_REG8(0x1106), 0x0 }, //,Vertical ROI.VSTART1_B(1)
-	{ CCI_REG8(0x1107), 0x0 }, //,Vertical ROI.VSTART1_B(2)
-	{ CCI_REG8(0x110A), 0x78 }, //,Vertical ROI.VSIZE1_B(0)
-	{ CCI_REG8(0x110B), 0x5 }, //,Vertical ROI.VSIZE1_B(1)
-	{ CCI_REG8(0x110C), 0x0 }, //,Vertical ROI.VSIZE1_B(2)
-	{ CCI_REG8(0x107D), 0x0 }, //,Vertical ROI.VSTART2_A(0)
-	{ CCI_REG8(0x107E), 0x0 }, //,Vertical ROI.VSTART2_A(1)
-	{ CCI_REG8(0x107F), 0x0 }, //,Vertical ROI.VSTART2_A(2)
-	{ CCI_REG8(0x1080), 0x0 }, //,Vertical ROI.VSTART2_A(3)
-	{ CCI_REG8(0x1081), 0x0 }, //,Vertical ROI.VSTART2_A(4)
-	{ CCI_REG8(0x1087), 0x78 }, //,Vertical ROI.VSIZE2_A(0)
-	{ CCI_REG8(0x1088), 0x5 }, //,Vertical ROI.VSIZE2_A(1)
-	{ CCI_REG8(0x1089), 0x0 }, //,Vertical ROI.VSIZE2_A(2)
-	{ CCI_REG8(0x108A), 0x0 }, //,Vertical ROI.VSIZE2_A(3)
-	{ CCI_REG8(0x108B), 0x0 }, //,Vertical ROI.VSIZE2_A(4)
-	{ CCI_REG8(0x1105), 0x0 }, //,Vertical ROI.VSTART2_B(0)
-	{ CCI_REG8(0x1106), 0x0 }, //,Vertical ROI.VSTART2_B(1)
-	{ CCI_REG8(0x1107), 0x0 }, //,Vertical ROI.VSTART2_B(2)
-	{ CCI_REG8(0x1108), 0x0 }, //,Vertical ROI.VSTART2_B(3)
-	{ CCI_REG8(0x1109), 0x0 }, //,Vertical ROI.VSTART2_B(4)
-	{ CCI_REG8(0x110A), 0x78 }, //,Vertical ROI.VSIZE2_B(0)
-	{ CCI_REG8(0x110B), 0x5 }, //,Vertical ROI.VSIZE2_B(1)
-	{ CCI_REG8(0x110C), 0x0 }, //,Vertical ROI.VSIZE2_B(2)
-	{ CCI_REG8(0x110D), 0x0 }, //,Vertical ROI.VSIZE2_B(3)
-	{ CCI_REG8(0x110E), 0x0 }, //,Vertical ROI.VSIZE2_B(4)
-	{ CCI_REG8(0x209C), 0x0 }, //,Mirroring && Flipping.HFLIP_A(0)
-	{ CCI_REG8(0x209D), 0x0 }, //,Mirroring && Flipping.HFLIP_B(0)
-	{ CCI_REG8(0x1095), 0x0 }, //,Mirroring && Flipping.VFLIP(0)
-	{ CCI_REG8(0x2063), 0x0 }, //,Mirroring && Flipping.BIT_ORDER(0)
-	{ CCI_REG8(0x6006), 0x0 }, //,MIPI.TX_CTRL_EN(0)
-	{ CCI_REG8(0x5004), 0x1 }, //,MIPI.datarate
-	{ CCI_REG8(0x5086), 0x2 }, //,MIPI.datarate
-	{ CCI_REG8(0x5087), 0x4E }, //,MIPI.datarate
-	{ CCI_REG8(0x5088), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x5090), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x5091), 0x8 }, //,MIPI.datarate
-	{ CCI_REG8(0x5092), 0x14 }, //,MIPI.datarate
-	{ CCI_REG8(0x5093), 0xF }, //,MIPI.datarate
-	{ CCI_REG8(0x5094), 0x6 }, //,MIPI.datarate
-	{ CCI_REG8(0x5095), 0x32 }, //,MIPI.datarate
-	{ CCI_REG8(0x5096), 0xE }, //,MIPI.datarate
-	{ CCI_REG8(0x5097), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x5098), 0x11 }, //,MIPI.datarate
-	{ CCI_REG8(0x5004), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x2066), 0x6C }, //,MIPI.datarate
-	{ CCI_REG8(0x2067), 0x7 }, //,MIPI.datarate
-	{ CCI_REG8(0x206E), 0x7E }, //,MIPI.datarate
-	{ CCI_REG8(0x206F), 0x6 }, //,MIPI.datarate
-	{ CCI_REG8(0x20AC), 0x7E }, //,MIPI.datarate
-	{ CCI_REG8(0x20AD), 0x6 }, //,MIPI.datarate
-	{ CCI_REG8(0x2076), 0xC8 }, //,MIPI.datarate
-	{ CCI_REG8(0x2077), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x20B4), 0xC8 }, //,MIPI.datarate
-	{ CCI_REG8(0x20B5), 0x0 }, //,MIPI.datarate
-	{ CCI_REG8(0x2078), 0x1E }, //,MIPI.datarate
-	{ CCI_REG8(0x2079), 0x4 }, //,MIPI.datarate
-	{ CCI_REG8(0x20B6), 0x1E }, //,MIPI.datarate
-	{ CCI_REG8(0x20B7), 0x4 }, //,MIPI.datarate
-	{ CCI_REG8(0x207A), 0xD4 }, //,MIPI.datarate
-	{ CCI_REG8(0x207B), 0x4 }, //,MIPI.datarate
-	{ CCI_REG8(0x20B8), 0xD4 }, //,MIPI.datarate
-	{ CCI_REG8(0x20B9), 0x4 }, //,MIPI.datarate
-	{ CCI_REG8(0x208D), 0x4 }, //,MIPI.CSI2_DTYPE(0)
-	{ CCI_REG8(0x208E), 0x0 }, //,MIPI.CSI2_DTYPE(1)
-	{ CCI_REG8(0x207C), 0x0 }, //,MIPI.VC_ID(0)
-	{ CCI_REG8(0x6001), 0x7 }, //,MIPI.TINIT(0)
-	{ CCI_REG8(0x6002), 0xD8 }, //,MIPI.TINIT(1)
-	{ CCI_REG8(0x6010), 0x0 }, //,MIPI.FRAME_MODE(0)
-	{ CCI_REG8(0x6010), 0x0 }, //,MIPI.EMBEDDED_FRAME_MODE(0)
-	{ CCI_REG8(0x6011), 0x0 }, //,MIPI.DATA_ENABLE_POLARITY(0)
-	{ CCI_REG8(0x6011), 0x0 }, //,MIPI.HSYNC_POLARITY(0)
-	{ CCI_REG8(0x6011), 0x0 }, //,MIPI.VSYNC_POLARITY(0)
-	{ CCI_REG8(0x6012), 0x1 }, //,MIPI.LANE(0)
-	{ CCI_REG8(0x6013), 0x0 }, //,MIPI.CLK_MODE(0)
-	{ CCI_REG8(0x6016), 0x0 }, //,MIPI.FRAME_COUNTER(0)
-	{ CCI_REG8(0x6017), 0x0 }, //,MIPI.FRAME_COUNTER(1)
-	{ CCI_REG8(0x6037), 0x1 }, //,MIPI.LINE_COUNT_RAW8(0)
-	{ CCI_REG8(0x6037), 0x3 }, //,MIPI.LINE_COUNT_RAW10(0)
-	{ CCI_REG8(0x6037), 0x7 }, //,MIPI.LINE_COUNT_RAW12(0)
-	{ CCI_REG8(0x6039), 0x1 }, //,MIPI.LINE_COUNT_EMB(0)
-	{ CCI_REG8(0x6018), 0x0 }, //,MIPI.CCI_READ_INTERRUPT_EN(0)
-	{ CCI_REG8(0x6018), 0x0 }, //,MIPI.CCI_WRITE_INTERRUPT_EN(0)
-	{ CCI_REG8(0x6065), 0x0 }, //,MIPI.TWAKE_TIMER(0)
-	{ CCI_REG8(0x6066), 0x0 }, //,MIPI.TWAKE_TIMER(1)
-	{ CCI_REG8(0x601C), 0x0 }, //,MIPI.SKEW_CAL_EN(0)
-	{ CCI_REG8(0x601D), 0x0 }, //,MIPI.SKEW_COUNT(0)
-	{ CCI_REG8(0x601E), 0x22 }, //,MIPI.SKEW_COUNT(1)
-	{ CCI_REG8(0x601F), 0x0 }, //,MIPI.SCRAMBLING_EN(0)
-	{ CCI_REG8(0x6003), 0x1 }, //,MIPI.INIT_SKEW_EN(0)
-	{ CCI_REG8(0x6004), 0x7A }, //,MIPI.INIT_SKEW(0)
-	{ CCI_REG8(0x6005), 0x12 }, //,MIPI.INIT_SKEW(1)
-	{ CCI_REG8(0x6006), 0x1 }, //,MIPI.TX_CTRL_EN(0)
-	{ CCI_REG8(0x4006), 0x8 }, //,Processing.BSP(0)
-	{ CCI_REG8(0x209E), 0x2 }, //,Processing.BIT_DEPTH(0)
-	{ CCI_REG8(0x2045), 0x1 }, //,Processing.CDS_RNC(0)
-	{ CCI_REG8(0x2048), 0x1 }, //,Processing.CDS_IMG(0)
-	{ CCI_REG8(0x204B), 0x3 }, //,Processing.RNC_EN(0)
-	{ CCI_REG8(0x205B), 0x64 }, //,Processing.RNC_DARK_TARGET(0)
-	{ CCI_REG8(0x205C), 0x0 }, //,Processing.RNC_DARK_TARGET(1)
-	{ CCI_REG8(0x24DC), 0x12 }, //,Defect Pixel Correction.DC_ENABLE(0)
-	{ CCI_REG8(0x24DC), 0x10 }, //,Defect Pixel Correction.DC_MODE(0)
-	{ CCI_REG8(0x24DC),
-	  0x0 }, //,Defect Pixel Correction.DC_REPLACEMENT_VALUE(0)
-	{ CCI_REG8(0x24DD), 0x0 }, //,Defect Pixel Correction.DC_LIMIT_LOW(0)
-	{ CCI_REG8(0x24DE), 0x0 }, //,Defect Pixel Correction.DC_LIMIT_HIGH(0)
-	{ CCI_REG8(0x24DF),
-	  0x0 }, //,Defect Pixel Correction.DC_LIMIT_HIGH_MODE(0)
-	{ CCI_REG8(0x10D7), 0x1 }, //,Illumination Trigger.ILLUM_EN(0)
-	{ CCI_REG8(0x10D8), 0x2 }, //,Illumination Trigger.ILLUM_POL(0)
-	{ CCI_REG8(0x205D), 0x0 }, //,Histogram.HIST_EN(0)
-	{ CCI_REG8(0x205E), 0x0 }, //,Histogram.HIST_USAGE_RATIO(0)
-	{ CCI_REG8(0x2063), 0x0 }, //,Histogram.PIXEL_DATA_SUPP(0)
-	{ CCI_REG8(0x2063), 0x0 }, //,Histogram.PIXEL_TRANSMISSION(0)
-	{ CCI_REG8(0x2091), 0x0 }, //,Test Pattern Generator.TPG_EN(0)
-	{ CCI_REG8(0x2091), 0x0 }, //,Test Pattern Generator.TPG_CONFIG(0)
+	{ CCI_REG8(0x1003), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x6006), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x6012), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x6013), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x6006), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x205D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x2063), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x24DC), 0x13 }, //  Initial Upload
+	{ CCI_REG8(0x24DD), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x24DE), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x24DF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x4006), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x401C), 0x6F }, //  Initial Upload
+	{ CCI_REG8(0x204B), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x205B), 0x64 }, //  Initial Upload
+	{ CCI_REG8(0x205C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x4018), 0x3F }, //  Initial Upload
+	{ CCI_REG8(0x403B), 0xB }, //  Initial Upload
+	{ CCI_REG8(0x403E), 0xE }, //  Initial Upload
+	{ CCI_REG8(0x402B), 0x6 }, //  Initial Upload
+	{ CCI_REG8(0x401E), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x4038), 0x3B }, //  Initial Upload
+	{ CCI_REG8(0x1077), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x1078), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x1009), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x100A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x110F), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x1110), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x1006), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x402C), 0x64 }, //  Initial Upload
+	{ CCI_REG8(0x3064), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3065), 0xF0 }, //  Initial Upload
+	{ CCI_REG8(0x4013), 0x13 }, //  Initial Upload
+	{ CCI_REG8(0x401F), 0x9 }, //  Initial Upload
+	{ CCI_REG8(0x4020), 0x13 }, //  Initial Upload
+	{ CCI_REG8(0x4044), 0x75 }, //  Initial Upload
+	{ CCI_REG8(0x4027), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3215), 0x69 }, //  Initial Upload
+	{ CCI_REG8(0x3216), 0xF }, //  Initial Upload
+	{ CCI_REG8(0x322B), 0x69 }, //  Initial Upload
+	{ CCI_REG8(0x322C), 0xF }, //  Initial Upload
+	{ CCI_REG8(0x4051), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x4052), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x4057), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x4058), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3212), 0x59 }, //  Initial Upload
+	{ CCI_REG8(0x4047), 0x8F }, //  Initial Upload
+	{ CCI_REG8(0x4026), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x4032), 0x53 }, //  Initial Upload
+	{ CCI_REG8(0x4036), 0x17 }, //  Initial Upload
+	{ CCI_REG8(0x50B8), 0xF4 }, //  Initial Upload
+	{ CCI_REG8(0x3016), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3017), 0x2C }, //  Initial Upload
+	{ CCI_REG8(0x3018), 0x8C }, //  Initial Upload
+	{ CCI_REG8(0x3019), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x301A), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3013), 0xA }, //  Initial Upload
+	{ CCI_REG8(0x301B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x301C), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x301D), 0x88 }, //  Initial Upload
+	{ CCI_REG8(0x301E), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x301F), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3020), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3021), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x3022), 0x88 }, //  Initial Upload
+	{ CCI_REG8(0x3023), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x3024), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3025), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3026), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x3027), 0x88 }, //  Initial Upload
+	{ CCI_REG8(0x3028), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x3029), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x302F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3056), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3057), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3300), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3301), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3302), 0xB0 }, //  Initial Upload
+	{ CCI_REG8(0x3303), 0xB0 }, //  Initial Upload
+	{ CCI_REG8(0x3304), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3305), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3306), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3307), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3308), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3309), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x330A), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x330B), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x330C), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x330D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x330E), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x330F), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3310), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3311), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3312), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3313), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3314), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3315), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3316), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3317), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3318), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3319), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x331A), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x331B), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x331C), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x331D), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x331E), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x331F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3320), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3321), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3322), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3323), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3324), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3325), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3326), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3327), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3328), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3329), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x332A), 0x2B }, //  Initial Upload
+	{ CCI_REG8(0x332B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x332C), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x332D), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x332E), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x332F), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3330), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3331), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3332), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3333), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3334), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3335), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3058), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x3059), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x305A), 0x9 }, //  Initial Upload
+	{ CCI_REG8(0x305B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3336), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3337), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3338), 0x90 }, //  Initial Upload
+	{ CCI_REG8(0x3339), 0xB0 }, //  Initial Upload
+	{ CCI_REG8(0x333A), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x333B), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x333C), 0x1F }, //  Initial Upload
+	{ CCI_REG8(0x333D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x333E), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x333F), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3340), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3341), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3342), 0x52 }, //  Initial Upload
+	{ CCI_REG8(0x3343), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3344), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3345), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x3346), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3347), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3348), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3349), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x334A), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x334B), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x334C), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x334D), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x334E), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x334F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3350), 0x50 }, //  Initial Upload
+	{ CCI_REG8(0x3351), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3352), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3353), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x3354), 0x18 }, //  Initial Upload
+	{ CCI_REG8(0x3355), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3356), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3357), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3358), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3359), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x335A), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x335B), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x335C), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x335D), 0xC4 }, //  Initial Upload
+	{ CCI_REG8(0x335E), 0x14 }, //  Initial Upload
+	{ CCI_REG8(0x335F), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x3360), 0xA5 }, //  Initial Upload
+	{ CCI_REG8(0x3361), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3362), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3363), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3364), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3365), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x3366), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3367), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3368), 0x90 }, //  Initial Upload
+	{ CCI_REG8(0x3369), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x336A), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x336B), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x336C), 0x12 }, //  Initial Upload
+	{ CCI_REG8(0x336D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x336E), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x336F), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3370), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3371), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3372), 0x32 }, //  Initial Upload
+	{ CCI_REG8(0x3373), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3374), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3375), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3376), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3377), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3378), 0x26 }, //  Initial Upload
+	{ CCI_REG8(0x3379), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x337A), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x337B), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x337C), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x337D), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x337E), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x337F), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x3380), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3381), 0xC4 }, //  Initial Upload
+	{ CCI_REG8(0x3382), 0x14 }, //  Initial Upload
+	{ CCI_REG8(0x3383), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3384), 0xA9 }, //  Initial Upload
+	{ CCI_REG8(0x3385), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3386), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3387), 0x84 }, //  Initial Upload
+	{ CCI_REG8(0x3388), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3389), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x338A), 0x41 }, //  Initial Upload
+	{ CCI_REG8(0x338B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x338C), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x338D), 0x80 }, //  Initial Upload
+	{ CCI_REG8(0x338E), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x338F), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3390), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x3391), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3392), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3393), 0xA0 }, //  Initial Upload
+	{ CCI_REG8(0x3394), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x3395), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x305C), 0x18 }, //  Initial Upload
+	{ CCI_REG8(0x305D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x305E), 0x19 }, //  Initial Upload
+	{ CCI_REG8(0x305F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3396), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x3397), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3398), 0x90 }, //  Initial Upload
+	{ CCI_REG8(0x3399), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x339A), 0x56 }, //  Initial Upload
+	{ CCI_REG8(0x339B), 0x57 }, //  Initial Upload
+	{ CCI_REG8(0x339C), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x339D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x339E), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x339F), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33A0), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33A1), 0x17 }, //  Initial Upload
+	{ CCI_REG8(0x33A2), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33A3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33A4), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33A5), 0x28 }, //  Initial Upload
+	{ CCI_REG8(0x33A6), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33A7), 0x17 }, //  Initial Upload
+	{ CCI_REG8(0x33A8), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x33A9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33AA), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33AB), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33AC), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33AD), 0x17 }, //  Initial Upload
+	{ CCI_REG8(0x33AE), 0x61 }, //  Initial Upload
+	{ CCI_REG8(0x33AF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33B0), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33B1), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33B2), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33B3), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x33B4), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33B5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33B6), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33B7), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33B8), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33B9), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x33BA), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33BB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33BC), 0x50 }, //  Initial Upload
+	{ CCI_REG8(0x33BD), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33BE), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33BF), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x33C0), 0x2C }, //  Initial Upload
+	{ CCI_REG8(0x33C1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33C2), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33C3), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33C4), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33C5), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x33C6), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33C7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33C8), 0x90 }, //  Initial Upload
+	{ CCI_REG8(0x33C9), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33CA), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33CB), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x33CC), 0x83 }, //  Initial Upload
+	{ CCI_REG8(0x33CD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33CE), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33CF), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33D0), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33D1), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x33D2), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33D3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33D4), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33D5), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x33D6), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33D7), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x33D8), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33D9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33DA), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33DB), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33DC), 0xD6 }, //  Initial Upload
+	{ CCI_REG8(0x33DD), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x33DE), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x33DF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33E0), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33E1), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33E2), 0x56 }, //  Initial Upload
+	{ CCI_REG8(0x33E3), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x33E4), 0x7 }, //  Initial Upload
+	{ CCI_REG8(0x33E5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x33E6), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x33E7), 0x20 }, //  Initial Upload
+	{ CCI_REG8(0x33E8), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x33E9), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x3060), 0x26 }, //  Initial Upload
+	{ CCI_REG8(0x3061), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x302A), 0xFF }, //  Initial Upload
+	{ CCI_REG8(0x302B), 0xFF }, //  Initial Upload
+	{ CCI_REG8(0x302C), 0xFF }, //  Initial Upload
+	{ CCI_REG8(0x302D), 0xFF }, //  Initial Upload
+	{ CCI_REG8(0x302E), 0x3F }, //  Initial Upload
+	{ CCI_REG8(0x3013), 0xB }, //  Initial Upload
+	{ CCI_REG8(0x102B), 0x2C }, //  Initial Upload
+	{ CCI_REG8(0x102C), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x1035), 0x54 }, //  Initial Upload
+	{ CCI_REG8(0x1036), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3090), 0x2A }, //  Initial Upload
+	{ CCI_REG8(0x3091), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x30C6), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30C7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30CF), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30D0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F3), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30F4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D8), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30D9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E1), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30E2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F3), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30F4), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x30F5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F6), 0x17 }, //  Initial Upload
+	{ CCI_REG8(0x30F7), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x30F8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30D8), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x30D9), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x30DA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DB), 0x19 }, //  Initial Upload
+	{ CCI_REG8(0x30DC), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x30DD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30DF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30E0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A2), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30A3), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x30A4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A5), 0x22 }, //  Initial Upload
+	{ CCI_REG8(0x30A6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30AA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30AB), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30AC), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x30AD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30AE), 0x22 }, //  Initial Upload
+	{ CCI_REG8(0x30AF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30BD), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30BE), 0x9F }, //  Initial Upload
+	{ CCI_REG8(0x30BF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C0), 0x7D }, //  Initial Upload
+	{ CCI_REG8(0x30C1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30C5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B4), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x30B5), 0x9C }, //  Initial Upload
+	{ CCI_REG8(0x30B6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B7), 0x7D }, //  Initial Upload
+	{ CCI_REG8(0x30B8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30B9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30BA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30BB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30BC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FC), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x30FD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30FF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3100), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3101), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3102), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3103), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3104), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3105), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3106), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3107), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3108), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3109), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x310A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x310B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x310C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x310D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3099), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x309A), 0x96 }, //  Initial Upload
+	{ CCI_REG8(0x309B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x309C), 0x6 }, //  Initial Upload
+	{ CCI_REG8(0x309D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x309E), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x309F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30A1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x310E), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x310F), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x3110), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3111), 0x2B }, //  Initial Upload
+	{ CCI_REG8(0x3112), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3113), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3114), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3115), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3116), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3117), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3118), 0x2 }, //  Initial Upload
+	{ CCI_REG8(0x3119), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x311A), 0x2C }, //  Initial Upload
+	{ CCI_REG8(0x311B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x311C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x311D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x311E), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x311F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30EA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30EB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30EC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30ED), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30EE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30EF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x30F2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x313B), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x313C), 0x31 }, //  Initial Upload
+	{ CCI_REG8(0x313D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x313E), 0x7 }, //  Initial Upload
+	{ CCI_REG8(0x313F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3140), 0x68 }, //  Initial Upload
+	{ CCI_REG8(0x3141), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3142), 0x34 }, //  Initial Upload
+	{ CCI_REG8(0x3143), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31A0), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x31A1), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x31A2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31A3), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31A4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31A5), 0x7E }, //  Initial Upload
+	{ CCI_REG8(0x31A6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31A7), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31A8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31A9), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x31AA), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x31AB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31AC), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31AD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31AE), 0x7E }, //  Initial Upload
+	{ CCI_REG8(0x31AF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31B0), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31B1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31B2), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x31B3), 0x16 }, //  Initial Upload
+	{ CCI_REG8(0x31B4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31B5), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31B6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31B7), 0x7E }, //  Initial Upload
+	{ CCI_REG8(0x31B8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31B9), 0x8 }, //  Initial Upload
+	{ CCI_REG8(0x31BA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3120), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3121), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x3122), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3123), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x3124), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3125), 0xA9 }, //  Initial Upload
+	{ CCI_REG8(0x3126), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3127), 0x6D }, //  Initial Upload
+	{ CCI_REG8(0x3128), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3129), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x312A), 0x15 }, //  Initial Upload
+	{ CCI_REG8(0x312B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x312C), 0xA }, //  Initial Upload
+	{ CCI_REG8(0x312D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x312E), 0x45 }, //  Initial Upload
+	{ CCI_REG8(0x312F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3130), 0x1D }, //  Initial Upload
+	{ CCI_REG8(0x3131), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3132), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3133), 0x7D }, //  Initial Upload
+	{ CCI_REG8(0x3134), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3135), 0xA }, //  Initial Upload
+	{ CCI_REG8(0x3136), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3137), 0xA9 }, //  Initial Upload
+	{ CCI_REG8(0x3138), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3139), 0x6D }, //  Initial Upload
+	{ CCI_REG8(0x313A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3144), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3145), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3146), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3147), 0x30 }, //  Initial Upload
+	{ CCI_REG8(0x3148), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3149), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x314A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x314B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x314C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x314D), 0x3 }, //  Initial Upload
+	{ CCI_REG8(0x314E), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x314F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3150), 0x31 }, //  Initial Upload
+	{ CCI_REG8(0x3151), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3152), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3153), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3154), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3155), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31D8), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31D9), 0x3A }, //  Initial Upload
+	{ CCI_REG8(0x31DA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31DB), 0x2E }, //  Initial Upload
+	{ CCI_REG8(0x31DC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31DD), 0x9E }, //  Initial Upload
+	{ CCI_REG8(0x31DE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31DF), 0x7E }, //  Initial Upload
+	{ CCI_REG8(0x31E0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31E1), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31E2), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31E3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31E4), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31E5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31E6), 0x73 }, //  Initial Upload
+	{ CCI_REG8(0x31E7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31E8), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31E9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31EA), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31EB), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31EC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31ED), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31EE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31EF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F0), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F1), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F3), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F4), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F6), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31F9), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31FA), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31FB), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31FC), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31FD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31FE), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31FF), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3200), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3201), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3202), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3203), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3204), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3205), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3206), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3207), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3208), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3209), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x320A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x320B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3164), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3165), 0x14 }, //  Initial Upload
+	{ CCI_REG8(0x3166), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3167), 0xC }, //  Initial Upload
+	{ CCI_REG8(0x3168), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3169), 0x44 }, //  Initial Upload
+	{ CCI_REG8(0x316A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x316B), 0x1F }, //  Initial Upload
+	{ CCI_REG8(0x316C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x316D), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x316E), 0x7C }, //  Initial Upload
+	{ CCI_REG8(0x316F), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3170), 0xC }, //  Initial Upload
+	{ CCI_REG8(0x3171), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3172), 0xA8 }, //  Initial Upload
+	{ CCI_REG8(0x3173), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3174), 0x6F }, //  Initial Upload
+	{ CCI_REG8(0x3175), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31C4), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31C5), 0x24 }, //  Initial Upload
+	{ CCI_REG8(0x31C6), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x31C7), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31C8), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31C9), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31CA), 0x24 }, //  Initial Upload
+	{ CCI_REG8(0x31CB), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x31CC), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31CD), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31CE), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31CF), 0x24 }, //  Initial Upload
+	{ CCI_REG8(0x31D0), 0x1 }, //  Initial Upload
+	{ CCI_REG8(0x31D1), 0x4 }, //  Initial Upload
+	{ CCI_REG8(0x31D2), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31D3), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x31D4), 0x73 }, //  Initial Upload
+	{ CCI_REG8(0x31D5), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x31D6), 0xB1 }, //  Initial Upload
+	{ CCI_REG8(0x31D7), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3176), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3177), 0x10 }, //  Initial Upload
+	{ CCI_REG8(0x3178), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3179), 0x56 }, //  Initial Upload
+	{ CCI_REG8(0x317A), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x317B), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x317C), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x317D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x317E), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x317F), 0x5 }, //  Initial Upload
+	{ CCI_REG8(0x3180), 0x6A }, //  Initial Upload
+	{ CCI_REG8(0x3181), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3182), 0xAD }, //  Initial Upload
+	{ CCI_REG8(0x3183), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3184), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3185), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3186), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x3187), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x100C), 0x7E }, //  Initial Upload
+	{ CCI_REG8(0x100D), 0x0 }, //  Initial Upload
+	{ CCI_REG8(0x1012), 0xDF }, //  Initial Upload
+	{ CCI_REG8(0x1013), 0x2B }, //  Initial Upload
+	{ CCI_REG8(0x1002), 0x4 }, //  Initial Upload
+	//CCI_REG8(/ ){0x1003,0x10}, //  Sensor Control Mode.IMAGER_STATE(0)
+	{ CCI_REG8(0x0043), 0x0 }, //  Sensor Control Mode.SLEEP_POWER_MODE(0)
+	{ CCI_REG8(0x0043), 0x0 }, //  Sensor Control Mode.IDLE_POWER_MODE(0)
+	{ CCI_REG8(0x0043), 0x4 }, //  Sensor Control Mode.SYSTEM_CLOCK_ENABLE(0)
+	{ CCI_REG8(0x0043), 0xC }, //  Sensor Control Mode.SRAM_CLOCK_ENABLE(0)
+	{ CCI_REG8(0x1002), 0x4 }, //  Sensor Control Mode.IMAGER_RUN_CONT(0)
+	{ CCI_REG8(0x1001), 0x41 }, //  Sensor Control Mode.EXT_EVENT_SEL(0)
+	{ CCI_REG8(0x10F2), 0x1 }, //  Sensor Control Mode.NB_OF_FRAMES_A(0)
+	{ CCI_REG8(0x10F3), 0x0 }, //  Sensor Control Mode.NB_OF_FRAMES_A(1)
+	{ CCI_REG8(0x1111), 0x1 }, //  Sensor Control Mode.NB_OF_FRAMES_B(0)
+	{ CCI_REG8(0x1112), 0x0 }, //  Sensor Control Mode.NB_OF_FRAMES_B(1)
+	{ CCI_REG8(0x0012), 0x0 }, //  IO Drive Strength.DIG_DRIVE_STRENGTH(0)
+	{ CCI_REG8(0x0012), 0x0 }, //  IO Drive Strength.CCI_DRIVE_STRENGTH(0)
+	{ CCI_REG8(0x1001), 0x41 }, //  Readout && Exposure.EXT_EXP_PW_SEL(0)
+	{ CCI_REG8(0x10D0), 0x0 }, //  Readout && Exposure.EXT_EXP_PW_DELAY(0)
+	{ CCI_REG8(0x10D1), 0x0 }, //  Readout && Exposure.EXT_EXP_PW_DELAY(1)
+	{ CCI_REG8(0x1012), 0x91 }, //  Readout && Exposure.VBLANK_A(0)
+	{ CCI_REG8(0x1013), 0xD }, //  Readout && Exposure.VBLANK_A(1)
+	{ CCI_REG8(0x1103), 0x91 }, //  Readout && Exposure.VBLANK_B(0)
+	{ CCI_REG8(0x1104), 0xD }, //  Readout && Exposure.VBLANK_B(1)
+	{ CCI_REG8(0x100C), 0x80 }, //  Readout && Exposure.EXP_TIME_A(0)
+	{ CCI_REG8(0x100D), 0x0 }, //  Readout && Exposure.EXP_TIME_A(1)
+	{ CCI_REG8(0x1115), 0x80 }, //  Readout && Exposure.EXP_TIME_B(0)
+	{ CCI_REG8(0x1116), 0x0 }, //  Readout && Exposure.EXP_TIME_B(1)
+	{ CCI_REG8(0x102B), 0x30 }, //  Readout && Exposure.ROW_LENGTH_A(0)
+	{ CCI_REG8(0x102C), 0x1 }, //  Readout && Exposure.ROW_LENGTH_A(1)
+	{ CCI_REG8(0x1113), 0x30 }, //  Readout && Exposure.ROW_LENGTH_B(0)
+	{ CCI_REG8(0x1114), 0x1 }, //  Readout && Exposure.ROW_LENGTH_B(1)
+	{ CCI_REG8(0x2008), 0x20 }, //  Horizontal ROI.HSIZE_A(0)
+	{ CCI_REG8(0x2009), 0x3 }, //  Horizontal ROI.HSIZE_A(1)
+	{ CCI_REG8(0x2098), 0x20 }, //  Horizontal ROI.HSIZE_B(0)
+	{ CCI_REG8(0x2099), 0x3 }, //  Horizontal ROI.HSIZE_B(1)
+	{ CCI_REG8(0x200A), 0x0 }, //  Horizontal ROI.HSTART_A(0)
+	{ CCI_REG8(0x200B), 0x0 }, //  Horizontal ROI.HSTART_A(1)
+	{ CCI_REG8(0x209A), 0x0 }, //  Horizontal ROI.HSTART_B(0)
+	{ CCI_REG8(0x209B), 0x0 }, //  Horizontal ROI.HSTART_B(1)
+	{ CCI_REG8(0x207D), 0x40 }, //  Horizontal ROI.MIPI_HSIZE(0)
+	{ CCI_REG8(0x207E), 0x6 }, //  Horizontal ROI.MIPI_HSIZE(1)
+	{ CCI_REG8(0x107D), 0x0 }, //  Vertical ROI.VSTART0_A(0)
+	{ CCI_REG8(0x107E), 0x0 }, //  Vertical ROI.VSTART0_A(1)
+	{ CCI_REG8(0x1087), 0x78 }, //  Vertical ROI.VSIZE0_A(0)
+	{ CCI_REG8(0x1088), 0x5 }, //  Vertical ROI.VSIZE0_A(1)
+	{ CCI_REG8(0x1105), 0x0 }, //  Vertical ROI.VSTART0_B(0)
+	{ CCI_REG8(0x1106), 0x0 }, //  Vertical ROI.VSTART0_B(1)
+	{ CCI_REG8(0x110A), 0x78 }, //  Vertical ROI.VSIZE0_B(0)
+	{ CCI_REG8(0x110B), 0x5 }, //  Vertical ROI.VSIZE0_B(1)
+	{ CCI_REG8(0x107D), 0x0 }, //  Vertical ROI.VSTART1_A(0)
+	{ CCI_REG8(0x107E), 0x0 }, //  Vertical ROI.VSTART1_A(1)
+	{ CCI_REG8(0x107F), 0x0 }, //  Vertical ROI.VSTART1_A(2)
+	{ CCI_REG8(0x1087), 0x78 }, //  Vertical ROI.VSIZE1_A(0)
+	{ CCI_REG8(0x1088), 0x5 }, //  Vertical ROI.VSIZE1_A(1)
+	{ CCI_REG8(0x1089), 0x0 }, //  Vertical ROI.VSIZE1_A(2)
+	{ CCI_REG8(0x1105), 0x0 }, //  Vertical ROI.VSTART1_B(0)
+	{ CCI_REG8(0x1106), 0x0 }, //  Vertical ROI.VSTART1_B(1)
+	{ CCI_REG8(0x1107), 0x0 }, //  Vertical ROI.VSTART1_B(2)
+	{ CCI_REG8(0x110A), 0x78 }, //  Vertical ROI.VSIZE1_B(0)
+	{ CCI_REG8(0x110B), 0x5 }, //  Vertical ROI.VSIZE1_B(1)
+	{ CCI_REG8(0x110C), 0x0 }, //  Vertical ROI.VSIZE1_B(2)
+	{ CCI_REG8(0x107D), 0x0 }, //  Vertical ROI.VSTART2_A(0)
+	{ CCI_REG8(0x107E), 0x0 }, //  Vertical ROI.VSTART2_A(1)
+	{ CCI_REG8(0x107F), 0x0 }, //  Vertical ROI.VSTART2_A(2)
+	{ CCI_REG8(0x1080), 0x0 }, //  Vertical ROI.VSTART2_A(3)
+	{ CCI_REG8(0x1081), 0x0 }, //  Vertical ROI.VSTART2_A(4)
+	{ CCI_REG8(0x1087), 0x78 }, //  Vertical ROI.VSIZE2_A(0)
+	{ CCI_REG8(0x1088), 0x5 }, //  Vertical ROI.VSIZE2_A(1)
+	{ CCI_REG8(0x1089), 0x0 }, //  Vertical ROI.VSIZE2_A(2)
+	{ CCI_REG8(0x108A), 0x0 }, //  Vertical ROI.VSIZE2_A(3)
+	{ CCI_REG8(0x108B), 0x0 }, //  Vertical ROI.VSIZE2_A(4)
+	{ CCI_REG8(0x1105), 0x0 }, //  Vertical ROI.VSTART2_B(0)
+	{ CCI_REG8(0x1106), 0x0 }, //  Vertical ROI.VSTART2_B(1)
+	{ CCI_REG8(0x1107), 0x0 }, //  Vertical ROI.VSTART2_B(2)
+	{ CCI_REG8(0x1108), 0x0 }, //  Vertical ROI.VSTART2_B(3)
+	{ CCI_REG8(0x1109), 0x0 }, //  Vertical ROI.VSTART2_B(4)
+	{ CCI_REG8(0x110A), 0x78 }, //  Vertical ROI.VSIZE2_B(0)
+	{ CCI_REG8(0x110B), 0x5 }, //  Vertical ROI.VSIZE2_B(1)
+	{ CCI_REG8(0x110C), 0x0 }, //  Vertical ROI.VSIZE2_B(2)
+	{ CCI_REG8(0x110D), 0x0 }, //  Vertical ROI.VSIZE2_B(3)
+	{ CCI_REG8(0x110E), 0x0 }, //  Vertical ROI.VSIZE2_B(4)
+	{ CCI_REG8(0x209C), 0x0 }, //  Mirroring && Flipping.HFLIP_A(0)
+	{ CCI_REG8(0x209D), 0x0 }, //  Mirroring && Flipping.HFLIP_B(0)
+	{ CCI_REG8(0x1095), 0x0 }, //  Mirroring && Flipping.VFLIP(0)
+	{ CCI_REG8(0x2063), 0x0 }, //  Mirroring && Flipping.BIT_ORDER(0)
+	{ CCI_REG8(0x6006), 0x0 }, //  MIPI.TX_CTRL_EN(0)
+	{ CCI_REG8(0x5004), 0x1 }, //  MIPI.datarate
+	{ CCI_REG8(0x5086), 0x2 }, //  MIPI.datarate
+	{ CCI_REG8(0x5087), 0x4E }, //  MIPI.datarate
+	{ CCI_REG8(0x5088), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x5090), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x5091), 0x8 }, //  MIPI.datarate
+	{ CCI_REG8(0x5092), 0x14 }, //  MIPI.datarate
+	{ CCI_REG8(0x5093), 0xF }, //  MIPI.datarate
+	{ CCI_REG8(0x5094), 0x6 }, //  MIPI.datarate
+	{ CCI_REG8(0x5095), 0x32 }, //  MIPI.datarate
+	{ CCI_REG8(0x5096), 0xE }, //  MIPI.datarate
+	{ CCI_REG8(0x5097), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x5098), 0x11 }, //  MIPI.datarate
+	{ CCI_REG8(0x5004), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x2066), 0x6C }, //  MIPI.datarate
+	{ CCI_REG8(0x2067), 0x7 }, //  MIPI.datarate
+	{ CCI_REG8(0x206E), 0x7E }, //  MIPI.datarate
+	{ CCI_REG8(0x206F), 0x6 }, //  MIPI.datarate
+	{ CCI_REG8(0x20AC), 0x7E }, //  MIPI.datarate
+	{ CCI_REG8(0x20AD), 0x6 }, //  MIPI.datarate
+	{ CCI_REG8(0x2076), 0xC8 }, //  MIPI.datarate
+	{ CCI_REG8(0x2077), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x20B4), 0xC8 }, //  MIPI.datarate
+	{ CCI_REG8(0x20B5), 0x0 }, //  MIPI.datarate
+	{ CCI_REG8(0x2078), 0x1E }, //  MIPI.datarate
+	{ CCI_REG8(0x2079), 0x4 }, //  MIPI.datarate
+	{ CCI_REG8(0x20B6), 0x1E }, //  MIPI.datarate
+	{ CCI_REG8(0x20B7), 0x4 }, //  MIPI.datarate
+	{ CCI_REG8(0x207A), 0xD4 }, //  MIPI.datarate
+	{ CCI_REG8(0x207B), 0x4 }, //  MIPI.datarate
+	{ CCI_REG8(0x20B8), 0xD4 }, //  MIPI.datarate
+	{ CCI_REG8(0x20B9), 0x4 }, //  MIPI.datarate
+	{ CCI_REG8(0x208D), 0x4 }, //  MIPI.CSI2_DTYPE(0)
+	{ CCI_REG8(0x208E), 0x0 }, //  MIPI.CSI2_DTYPE(1)
+	{ CCI_REG8(0x207C), 0x0 }, //  MIPI.VC_ID(0)
+	{ CCI_REG8(0x6001), 0x7 }, //  MIPI.TINIT(0)
+	{ CCI_REG8(0x6002), 0xD8 }, //  MIPI.TINIT(1)
+	{ CCI_REG8(0x6010), 0x0 }, //  MIPI.FRAME_MODE(0)
+	{ CCI_REG8(0x6010), 0x0 }, //  MIPI.EMBEDDED_FRAME_MODE(0)
+	{ CCI_REG8(0x6011), 0x0 }, //  MIPI.DATA_ENABLE_POLARITY(0)
+	{ CCI_REG8(0x6011), 0x0 }, //  MIPI.HSYNC_POLARITY(0)
+	{ CCI_REG8(0x6011), 0x0 }, //  MIPI.VSYNC_POLARITY(0)
+	{ CCI_REG8(0x6012), 0x1 }, //  MIPI.LANE(0)
+	{ CCI_REG8(0x6013), 0x0 }, //  MIPI.CLK_MODE(0)
+	{ CCI_REG8(0x6016), 0x0 }, //  MIPI.FRAME_COUNTER(0)
+	{ CCI_REG8(0x6017), 0x0 }, //  MIPI.FRAME_COUNTER(1)
+	{ CCI_REG8(0x6037), 0x1 }, //  MIPI.LINE_COUNT_RAW8(0)
+	{ CCI_REG8(0x6037), 0x3 }, //  MIPI.LINE_COUNT_RAW10(0)
+	{ CCI_REG8(0x6037), 0x7 }, //  MIPI.LINE_COUNT_RAW12(0)
+	{ CCI_REG8(0x6039), 0x1 }, //  MIPI.LINE_COUNT_EMB(0)
+	{ CCI_REG8(0x6018), 0x0 }, //  MIPI.CCI_READ_INTERRUPT_EN(0)
+	{ CCI_REG8(0x6018), 0x0 }, //  MIPI.CCI_WRITE_INTERRUPT_EN(0)
+	{ CCI_REG8(0x6065), 0x0 }, //  MIPI.TWAKE_TIMER(0)
+	{ CCI_REG8(0x6066), 0x0 }, //  MIPI.TWAKE_TIMER(1)
+	{ CCI_REG8(0x601C), 0x0 }, //  MIPI.SKEW_CAL_EN(0)
+	{ CCI_REG8(0x601D), 0x0 }, //  MIPI.SKEW_COUNT(0)
+	{ CCI_REG8(0x601E), 0x22 }, //  MIPI.SKEW_COUNT(1)
+	{ CCI_REG8(0x601F), 0x0 }, //  MIPI.SCRAMBLING_EN(0)
+	{ CCI_REG8(0x6003), 0x1 }, //  MIPI.INIT_SKEW_EN(0)
+	{ CCI_REG8(0x6004), 0x7A }, //  MIPI.INIT_SKEW(0)
+	{ CCI_REG8(0x6005), 0x12 }, //  MIPI.INIT_SKEW(1)
+	{ CCI_REG8(0x6006), 0x1 }, //  MIPI.TX_CTRL_EN(0)
+	{ CCI_REG8(0x4006), 0x8 }, //  Processing.BSP(0)
+	{ CCI_REG8(0x209E), 0x2 }, //  Processing.BIT_DEPTH(0)
+	{ CCI_REG8(0x2045), 0x1 }, //  Processing.CDS_RNC(0)
+	{ CCI_REG8(0x2048), 0x1 }, //  Processing.CDS_IMG(0)
+	{ CCI_REG8(0x204B), 0x3 }, //  Processing.RNC_EN(0)
+	{ CCI_REG8(0x205B), 0x64 }, //  Processing.RNC_DARK_TARGET(0)
+	{ CCI_REG8(0x205C), 0x0 }, //  Processing.RNC_DARK_TARGET(1)
+	{ CCI_REG8(0x24DC), 0x12 }, //  Defect Pixel Correction.DC_ENABLE(0)
+	{ CCI_REG8(0x24DC), 0x10 }, //  Defect Pixel Correction.DC_MODE(0)
+	{ CCI_REG8(0x24DC),	0x0 }, //  Defect Pixel Correction.DC_REPLACEMENT_VALUE(0)
+	{ CCI_REG8(0x24DD), 0x0 }, //  Defect Pixel Correction.DC_LIMIT_LOW(0)
+	{ CCI_REG8(0x24DE), 0x0 }, //  Defect Pixel Correction.DC_LIMIT_HIGH(0)
+	{ CCI_REG8(0x24DF),	0x0 }, //  Defect Pixel Correction.DC_LIMIT_HIGH_MODE(0)
+	{ CCI_REG8(0x10D7), 0x1 }, //  Illumination Trigger.ILLUM_EN(0)
+	{ CCI_REG8(0x10D8), 0x2 }, //  Illumination Trigger.ILLUM_POL(0)
+	{ CCI_REG8(0x205D), 0x0 }, //  Histogram.HIST_EN(0)
+	{ CCI_REG8(0x205E), 0x0 }, //  Histogram.HIST_USAGE_RATIO(0)
+	{ CCI_REG8(0x2063), 0x0 }, //  Histogram.PIXEL_DATA_SUPP(0)
+	{ CCI_REG8(0x2063), 0x0 }, //  Histogram.PIXEL_TRANSMISSION(0)
+	{ CCI_REG8(0x2091), 0x0 }, //  Test Pattern Generator.TPG_EN(0)
+	{ CCI_REG8(0x2091), 0x0 }, //  Test Pattern Generator.TPG_CONFIG(0)
 };
 
 static const char *const mira220_test_pattern_menu[] = {
@@ -1161,7 +1159,6 @@ static int mira220_power_on(struct device *dev)
 	struct mira220 *mira220 = to_mira220(sd);
 	int ret = -EINVAL;
 
-	printk(KERN_INFO "[MIRA220]: Entering power on function.\n");
 
 	/* The mira220_power_on() function is called at three places:
 	  * (1) by mira220_probe when driver is loaded
@@ -1203,7 +1200,6 @@ static int mira220_power_off(struct device *dev)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct mira220 *mira220 = to_mira220(sd);
 	(void)mira220;
-	printk(KERN_INFO "[MIRA220]: Entering power off function.\n");
 
 	regulator_bulk_disable(MIRA220_NUM_SUPPLIES, mira220->supplies);
 	clk_disable_unprepare(mira220->xclk);
@@ -1313,27 +1309,10 @@ static int mira220_write_exposure_reg(struct mira220 *mira220, u32 exposure)
 		capped_exposure = max_exposure;
 	}
 
-	printk(KERN_INFO
-	       "[MIRA220]: exposure fun width %d, hblank %d, vblank %d, row len %d, ctrl->val %d capped to %d.\n",
-	       mira220->mode->width, mira220->hblank->val, mira220->vblank->val,
-	       mira220->mode->row_length, exposure, capped_exposure);
-
-	/*test cci write*/
-	ret = cci_read(mira220->regmap, MIRA220_EXP_TIME_REG, &readval, &ret);
-	otherval = readval & 0xFFFF;
-	//  printk(KERN_INFO "[MIRA220]: HIGH EXP Read reg %d, otherval= %d\n",
-	// MIRA220_EXP_TIME_REG,otherval);
 	ret = cci_write(mira220->regmap, MIRA220_EXP_TIME_REG, capped_exposure,
 			NULL);
-	/*ret = cci_write(mira220->regmap, MIRA220_EXP_TIME_LO_REG_NEW,
-		0xAA, NULL);
-	 usleep_range(1000000, 1000000+100);
-	 ret = cci_read(mira220->regmap,MIRA220_EXP_TIME_LO_REG_NEW, &readval, NULL );
-	 printk(KERN_INFO "[MIRA220]: LOW EXP Read reg %d, val = %llu.\n",
-		MIRA220_EXP_TIME_LO_REG_NEW, readval);
-	 */
 
-	//ret = mira220_write16(mira220, MIRA220_EXP_TIME_LO_REG, capped_exposure);
+
 	if (ret) {
 		dev_err_ratelimited(&client->dev,
 				    "Error setting exposure time to %d",
@@ -1478,11 +1457,7 @@ static int mira220_set_ctrl(struct v4l2_ctrl *ctrl)
 	case V4L2_CID_VBLANK:
 		ret = cci_write(mira220->regmap, MIRA220_VBLANK_REG, ctrl->val,
 				NULL);
-		printk(KERN_INFO
-		       "[MIRA220]: width %d, hblank %d, vblank %d, height %d, ctrl->val %d.\n",
-		       mira220->mode->width, mira220->mode->hblank,
-		       mira220->mode->min_vblank, mira220->mode->height,
-		       ctrl->val);
+
 		break;
 	case V4L2_CID_HBLANK:
 		break;
@@ -1578,14 +1553,6 @@ static void mira220_update_image_pad_format(struct mira220 *mira220,
 					    const struct mira220_mode *mode,
 					    struct v4l2_subdev_format *fmt)
 {
-	if (mode != NULL) {
-		printk(KERN_INFO
-		       "[MIRA220]: mira220_update_image_pad_format() width %d, height %d.\n",
-		       mode->width, mode->height);
-	} else {
-		printk(KERN_ERR
-		       "[MIRA220]: mira220_update_image_pad_format() mode is NULL.\n");
-	}
 	fmt->format.width = mode->width;
 	fmt->format.height = mode->height;
 	fmt->format.field = V4L2_FIELD_NONE;
@@ -1670,21 +1637,12 @@ static int mira220_set_pad_format(struct v4l2_subdev *sd,
 					      fmt->format.height);
 		mira220_update_image_pad_format(mira220, mode, fmt);
 		if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() use try_format.\n");
 			framefmt = v4l2_subdev_state_get_format(sd_state,
 								fmt->pad);
 			*framefmt = fmt->format;
 		} else if (mira220->mode != mode ||
 			   mira220->fmt.code != fmt->format.code) {
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() use new mode.\n");
-			printk(KERN_INFO
-			       "[MIRA220]: mira220->mode %p mode %p.\n",
-			       (void *)mira220->mode, (void *)mode);
-			printk(KERN_INFO
-			       "[MIRA220]: mira220->fmt.code 0x%x fmt->format.code 0x%x.\n",
-			       mira220->fmt.code, fmt->format.code);
+
 
 			mira220->fmt = fmt->format;
 			mira220->mode = mode;
@@ -1697,9 +1655,6 @@ static int mira220_set_pad_format(struct v4l2_subdev *sd,
 			default_exp = MIRA220_DEFAULT_EXPOSURE > max_exposure ?
 					      max_exposure :
 					      MIRA220_DEFAULT_EXPOSURE;
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() min_exp %d max_exp %d, default_exp %d\n",
-			       MIRA220_EXPOSURE_MIN, max_exposure, default_exp);
 			__v4l2_ctrl_modify_range(mira220->exposure,
 						 MIRA220_EXPOSURE_MIN,
 						 max_exposure, 1, default_exp);
@@ -1709,31 +1664,19 @@ static int mira220_set_pad_format(struct v4l2_subdev *sd,
 						 mira220->mode->pixel_rate,
 						 mira220->mode->pixel_rate, 1,
 						 mira220->mode->pixel_rate);
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() update V4L2_CID_PIXEL_RATE to %u\n",
-			       mira220->mode->pixel_rate);
 
 			// Update hblank based on new mode.
 			__v4l2_ctrl_modify_range(mira220->hblank,
 						 mira220->mode->hblank,
 						 mira220->mode->hblank, 1,
 						 mira220->mode->hblank);
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() update V4L2_CID_HBLANK to %u\n",
-			       mira220->mode->hblank);
 
-			printk(KERN_INFO "[MIRA220]: Mira220 VBLANK  = %u.\n",
-			       mira220->mode->min_vblank);
 
 			__v4l2_ctrl_modify_range(mira220->vblank,
 						 mira220->mode->min_vblank,
 						 mira220->mode->max_vblank, 1,
 						 mira220->mode->min_vblank);
 
-			// Set the current vblank value
-			printk(KERN_INFO
-			       "[MIRA220]: mira220_set_pad_format() mira220->mode->min_vblank, %d\n",
-			       mira220->mode->min_vblank);
 
 			__v4l2_ctrl_s_ctrl(mira220->vblank,
 					   mira220->mode->min_vblank);
@@ -1749,9 +1692,6 @@ static int mira220_set_pad_format(struct v4l2_subdev *sd,
 		}
 	}
 
-	printk(KERN_INFO
-	       "[MIRA220]: mira220_set_pad_format() to unlock and return.\n");
-
 	mutex_unlock(&mira220->mutex);
 
 	return 0;
@@ -1762,8 +1702,6 @@ static int mira220_set_framefmt(struct mira220 *mira220)
 	switch (mira220->fmt.code) {
 	case MEDIA_BUS_FMT_Y8_1X8:
 	case MEDIA_BUS_FMT_SGRBG8_1X8:
-		printk(KERN_INFO
-		       "[MIRA220]: mira220_set_framefmt() write 8 bpp regs.\n");
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_8_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
@@ -1771,8 +1709,6 @@ static int mira220_set_framefmt(struct mira220 *mira220)
 		return 0;
 	case MEDIA_BUS_FMT_Y10_1X10:
 	case MEDIA_BUS_FMT_SGRBG10_1X10:
-		printk(KERN_INFO
-		       "[MIRA220]: mira220_set_framefmt() write 10 bpp regs.\n");
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_10_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
@@ -1781,8 +1717,6 @@ static int mira220_set_framefmt(struct mira220 *mira220)
 		return 0;
 	case MEDIA_BUS_FMT_Y12_1X12:
 	case MEDIA_BUS_FMT_SGRBG12_1X12:
-		printk(KERN_INFO
-		       "[MIRA220]: mira220_set_framefmt() write 12 bpp regs.\n");
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_12_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
@@ -1790,8 +1724,6 @@ static int mira220_set_framefmt(struct mira220 *mira220)
 
 		return 0;
 	default:
-		printk(KERN_ERR "Unknown format requested %d",
-		       mira220->fmt.code);
 	}
 
 	return -EINVAL;
@@ -1854,21 +1786,16 @@ static int mira220_start_streaming(struct mira220 *mira220)
 	struct i2c_client *client = v4l2_get_subdevdata(&mira220->sd);
 	const struct mira220_reg_list *reg_list;
 	int ret;
-
-	printk(KERN_INFO "[MIRA220]: Entering start streaming function.\n");
-
 	/* Follow examples of other camera driver, here use pm_runtime_resume_and_get */
 	ret = pm_runtime_resume_and_get(&client->dev);
 
 	if (ret < 0) {
-		//printk(KERN_INFO "[MIRA220]: get_sync failed, but continue.\n");
 		pm_runtime_put_noidle(&client->dev);
 		return ret;
 	}
 
 	/* Apply default values of current mode */
 	/* Stop treaming before uploading register sequence */
-	printk(KERN_INFO "[MIRA220]: Writing stop streaming regs.\n");
 	ret = mira220_write_stop_streaming_regs(mira220);
 	if (ret) {
 		dev_err(&client->dev, "Could not write stream-on sequence");
@@ -1876,8 +1803,6 @@ static int mira220_start_streaming(struct mira220 *mira220)
 	}
 
 	reg_list = &mira220->mode->reg_list;
-	printk(KERN_INFO "[MIRA220]: Write %d regs.\n", reg_list->num_of_regs);
-
 	ret = cci_multi_reg_write(mira220->regmap, reg_list->regs,
 				  reg_list->num_of_regs, NULL);
 	// ret = mira220_write_regs(mira220, reg_list->regs, reg_list->num_of_regs);
@@ -1893,29 +1818,18 @@ static int mira220_start_streaming(struct mira220 *mira220)
 		goto err_rpm_put;
 	}
 
-	printk(KERN_INFO
-	       "[MIRA220]: Entering v4l2 ctrl handler setup function.\n");
-
 	/* Apply customized values from user */
 	ret = __v4l2_ctrl_handler_setup(mira220->sd.ctrl_handler);
-	printk(KERN_INFO "[MIRA220]: __v4l2_ctrl_handler_setup ret = %d.\n",
-	       ret);
 	if (ret)
 		goto err_rpm_put;
 
-	printk(KERN_INFO "[MIRA220]: Writing start streaming regs.\n");
 	ret = mira220_write_start_streaming_regs(mira220);
 	if (ret) {
 		dev_err(&client->dev, "Could not write stream-on sequence");
 		goto err_rpm_put;
 	}
 
-	/* vflip and hflip cannot change during streaming */
-	printk(KERN_INFO
-	       "[MIRA220]: Entering v4l2 ctrl grab vflip grab vflip.\n");
 	__v4l2_ctrl_grab(mira220->vflip, true);
-	printk(KERN_INFO
-	       "[MIRA220]: Entering v4l2 ctrl grab vflip grab hflip.\n");
 	__v4l2_ctrl_grab(mira220->hflip, true);
 
 	return 0;
@@ -1934,7 +1848,6 @@ static void mira220_stop_streaming(struct mira220 *mira220)
 	__v4l2_ctrl_grab(mira220->vflip, false);
 	__v4l2_ctrl_grab(mira220->hflip, false);
 
-	printk(KERN_INFO "[MIRA220]: Writing stop streaming regs.\n");
 	ret = mira220_write_stop_streaming_regs(mira220);
 	if (ret) {
 		dev_err(&client->dev,
@@ -1955,9 +1868,6 @@ static int mira220_set_stream(struct v4l2_subdev *sd, int enable)
 		return 0;
 	}
 
-	printk(KERN_INFO "[MIRA220]: Entering mira220_set_stream enable: %d.\n",
-	       enable);
-
 	if (enable) {
 		/*
 		  * Apply default & customized values
@@ -1974,10 +1884,6 @@ static int mira220_set_stream(struct v4l2_subdev *sd, int enable)
 
 	mutex_unlock(&mira220->mutex);
 
-	printk(KERN_INFO
-	       "[MIRA220]: Returning mira220_set_stream with ret: %d.\n",
-	       ret);
-
 	return ret;
 
 err_unlock:
@@ -1992,8 +1898,6 @@ static int __maybe_unused mira220_suspend(struct device *dev)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct mira220 *mira220 = to_mira220(sd);
 
-	printk(KERN_INFO "[MIRA220]: Entering suspend function.\n");
-
 	if (mira220->streaming)
 		mira220_stop_streaming(mira220);
 
@@ -2006,8 +1910,6 @@ static int __maybe_unused mira220_resume(struct device *dev)
 	struct v4l2_subdev *sd = i2c_get_clientdata(client);
 	struct mira220 *mira220 = to_mira220(sd);
 	int ret;
-
-	printk(KERN_INFO "[MIRA220]: Entering resume function.\n");
 
 	if (mira220->streaming) {
 		ret = mira220_start_streaming(mira220);
@@ -2141,10 +2043,6 @@ static int mira220_init_controls(struct mira220 *mira220)
 
 	mutex_init(&mira220->mutex);
 	ctrl_hdlr->lock = &mira220->mutex;
-
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_PIXEL_RATE %X.\n", __func__,
-	       V4L2_CID_PIXEL_RATE);
-
 	/* By default, PIXEL_RATE is read only */
 	mira220->pixel_rate = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 						V4L2_CID_PIXEL_RATE,
@@ -2152,17 +2050,11 @@ static int mira220_init_controls(struct mira220 *mira220)
 						mira220->mode->pixel_rate, 1,
 						mira220->mode->pixel_rate);
 
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_VBLANK %X.\n", __func__,
-	       V4L2_CID_VBLANK);
-
 	mira220->vblank = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 					    V4L2_CID_VBLANK,
 					    mira220->mode->min_vblank,
 					    mira220->mode->max_vblank, 1,
 					    mira220->mode->min_vblank);
-
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_HBLANK %X.\n", __func__,
-	       V4L2_CID_HBLANK);
 
 	mira220->hblank =
 		v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops, V4L2_CID_HBLANK,
@@ -2179,40 +2071,27 @@ static int mira220_init_controls(struct mira220 *mira220)
 		mira220->mode->height, mira220->vblank->val,
 		mira220->mode->row_length);
 
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_EXPOSURE %X.\n", __func__,
-	       V4L2_CID_EXPOSURE);
-
 	mira220->exposure =
 		v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 				  V4L2_CID_EXPOSURE, MIRA220_EXPOSURE_MIN,
 				  max_exposure, 1, MIRA220_DEFAULT_EXPOSURE);
-
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_ANALOGUE_GAIN %X.\n", __func__,
-	       V4L2_CID_ANALOGUE_GAIN);
 
 	mira220->gain = v4l2_ctrl_new_std(
 		ctrl_hdlr, &mira220_ctrl_ops, V4L2_CID_ANALOGUE_GAIN,
 		MIRA220_ANALOG_GAIN_MIN, MIRA220_ANALOG_GAIN_MAX,
 		MIRA220_ANALOG_GAIN_STEP, MIRA220_ANALOG_GAIN_DEFAULT);
 
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_HFLIP %X.\n", __func__,
-	       V4L2_CID_HFLIP);
-
 	mira220->hflip = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 					   V4L2_CID_HFLIP, 0, 1, 1, 0);
 	if (mira220->hflip)
 		mira220->hflip->flags |= V4L2_CTRL_FLAG_MODIFY_LAYOUT;
 
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_VFLIP %X.\n", __func__,
-	       V4L2_CID_VFLIP);
 
 	mira220->vflip = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 					   V4L2_CID_VFLIP, 0, 1, 1, 0);
 	if (mira220->vflip)
 		mira220->vflip->flags |= V4L2_CTRL_FLAG_MODIFY_LAYOUT;
 
-	printk(KERN_INFO "[MIRA220]: %s V4L2_CID_TEST_PATTERN %X.\n", __func__,
-	       V4L2_CID_TEST_PATTERN);
 	v4l2_ctrl_new_std_menu_items(ctrl_hdlr, &mira220_ctrl_ops,
 				     V4L2_CID_TEST_PATTERN,
 				     ARRAY_SIZE(mira220_test_pattern_menu) - 1,
@@ -2304,9 +2183,6 @@ static int mira220_probe(struct i2c_client *client)
 	struct mira220 *mira220;
 	int ret;
 
-	printk(KERN_INFO "[MIRA220]: probing v4l2 sensor.\n");
-	printk(KERN_INFO "[MIRA220]: Driver Version 0.0.\n");
-
 	dev_err(dev, "[MIRA220] name: %s.\n", client->name);
 
 	mira220 = devm_kzalloc(&client->dev, sizeof(*mira220), GFP_KERNEL);
@@ -2354,30 +2230,13 @@ static int mira220_probe(struct i2c_client *client)
 		return ret;
 
 	usleep_range(1000000, 1000000 + 100);
-	printk(KERN_INFO "[MIRA220]: Entering identify function.\n");
 
 	ret = mira220_identify_module(mira220);
 	if (ret)
 		goto error_power_off;
 
-	printk(KERN_INFO "[MIRA220]: Setting support function.\n");
-
-	/*test cci write*/
-	/*ret = cci_read(mira220->regmap,MIRA220_EXP_TIME_HI_REG_NEW, &readval, NULL );
-	 printk(KERN_INFO "[MIRA220]: HIGH EXP Read reg %d, val = %llu.\n",
-		MIRA220_EXP_TIME_HI_REG_NEW, readval);
-	 ret = cci_write(mira220->regmap, MIRA220_EXP_TIME_LO_REG_NEW,
-		0xAA, NULL);
-	 usleep_range(1000000, 1000000+100);
-	 ret = cci_read(mira220->regmap,MIRA220_EXP_TIME_LO_REG_NEW, &readval, NULL );
-	 printk(KERN_INFO "[MIRA220]: LOW EXP Read reg %d, val = %llu.\n",
-		MIRA220_EXP_TIME_LO_REG_NEW, readval);
-	 */
-
 	/* Set default mode to max resolution */
 	mira220->mode = &supported_modes[0];
-
-	printk(KERN_INFO "[MIRA220]: Entering init controls function.\n");
 
 	ret = mira220_init_controls(mira220);
 	if (ret)
@@ -2393,12 +2252,9 @@ static int mira220_probe(struct i2c_client *client)
 	mira220->pad[IMAGE_PAD].flags = MEDIA_PAD_FL_SOURCE;
 	mira220->pad[METADATA_PAD].flags = MEDIA_PAD_FL_SOURCE;
 
-	printk(KERN_INFO "[MIRA220]: Entering set default format function.\n");
 
 	/* Initialize default format */
 	mira220_set_default_format(mira220);
-
-	printk(KERN_INFO "[MIRA220]: Entering pads init function.\n");
 
 	ret = media_entity_pads_init(&mira220->sd.entity, NUM_PADS,
 				     mira220->pad);
@@ -2406,9 +2262,6 @@ static int mira220_probe(struct i2c_client *client)
 		dev_err(dev, "failed to init entity pads: %d\n", ret);
 		goto error_handler_free;
 	}
-
-	printk(KERN_INFO
-	       "[MIRA220]: Entering subdev sensor common function.\n");
 
 	ret = v4l2_async_register_subdev_sensor(&mira220->sd);
 	if (ret < 0) {
