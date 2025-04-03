@@ -1055,9 +1055,9 @@ static const int mira220_test_pattern_val[] = {
 static const char *const mira220_supply_name[] = {
 	// TODO(jalv): Check supply names
 	/* Supplies can be enabled in any order */
-	"VANA", /* Analog (2.8V) supply */
-	"VDIG", /* Digital Core (1.8V) supply */
-	"VDDL", /* IF (1.2V) supply */
+	"vana", /* Analog (2.8V) supply */
+	"vdig", /* Digital Core (1.8V) supply */
+	"vddl", /* IF (1.2V) supply */
 };
 
 #define MIRA220_NUM_SUPPLIES ARRAY_SIZE(mira220_supply_name)
