@@ -3511,7 +3511,6 @@ Params:
                                 (default 16).
 
 
-
 Name:   mira220
 Info:   ams mira220 camera module.
         Uses Unicam 1, which is the standard camera connector on most Pi
@@ -3525,7 +3524,6 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
                                 configuring the sensor (default on)
         cam0                    Adopt the default configuration for CAM0 on a
                                 Compute Module (CSI0, i2c_vc, and cam0_reg).
-
 
 
 Name:   mlx90640
@@ -3647,7 +3645,6 @@ Params: rotation                Mounting rotation of the camera sensor (0 or
         clk-continuous          Switch to continuous mode on the CSI clock lane,
                                 which increases the maximum frame rate slightly.
                                 Appears not to work on Pi3.
-
 
 
 Name:   papirus

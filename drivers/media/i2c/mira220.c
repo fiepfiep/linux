@@ -35,9 +35,9 @@
 #define MIRA220_PIXEL_ARRAY_WIDTH 1600U
 #define MIRA220_PIXEL_ARRAY_HEIGHT 1400U
 
+/* mira220 does not support analog gain. */
 #define MIRA220_ANALOG_GAIN_MIN 1
-#define MIRA220_ANALOG_GAIN_MAX \
-	1 /* Fixed analog gain to 1, to avoid unexpected behavior. */
+#define MIRA220_ANALOG_GAIN_MAX 1  
 #define MIRA220_ANALOG_GAIN_STEP 1
 #define MIRA220_ANALOG_GAIN_DEFAULT MIRA220_ANALOG_GAIN_MIN
 
@@ -95,11 +95,6 @@
 #define MIRA220_XCLR_MIN_DELAY_US 100000
 #define MIRA220_XCLR_DELAY_RANGE_US 30
 
-// Outdated. See below.
-// pixel_rate = link_freq * 2 * nr_of_lanes / bits_per_sample
-// 1.0Gb/s * 2 * 2 / 12 = 357913941
-// #define MIRA220_PIXEL_RATE		(357913941)
-
 // Mira220 PIXEL_RATE is derived from ROW_LENGTH. See datasheet Section 9.2.
 // ROW_LENGTH is set by registers: 0x102B, 0x102C. Unit is number of CLK_IN cycles.
 // PIXEL_RATE = 1000000000 * WIDTH / (ROW_LENGTH * CLK_IN_PERIOD_NS)
@@ -146,16 +141,12 @@
 #define MIRA220_TEST_PATTERN_DISABLE 0x00
 #define MIRA220_TEST_PATTERN_VERTICAL_GRADIENT 0x01
 
-/* Embedded metadata stream structure */
-#define MIRA220_EMBEDDED_LINE_WIDTH 16384
-#define MIRA220_NUM_EMBEDDED_LINES 1
-
 /* From Jetson driver */
 #define MIRA220_DEFAULT_LINE_LENGTH (0xA80)
 #define MIRA220_DEFAULT_PIXEL_CLOCK (160)
 #define MIRA220_DEFAULT_FRAME_LENGTH (0x07C0) //TODO REMOVE THESE
 
-enum pad_types { IMAGE_PAD, METADATA_PAD, NUM_PADS };
+enum pad_types { IMAGE_PAD, NUM_PADS };
 
 struct mira220_reg {
 	u16 address;
@@ -1369,8 +1360,6 @@ static int mira220_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	struct mira220 *mira220 = to_mira220(sd);
 	struct v4l2_mbus_framefmt *try_fmt_img =
 		v4l2_subdev_state_get_format(fh->state, IMAGE_PAD);
-	struct v4l2_mbus_framefmt *try_fmt_meta =
-		v4l2_subdev_state_get_format(fh->state, METADATA_PAD);
 	struct v4l2_rect *try_crop;
 
 	mutex_lock(&mira220->mutex);
@@ -1381,12 +1370,6 @@ static int mira220_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
 	try_fmt_img->code = mira220_validate_format_code_or_default(
 		mira220, supported_modes[0].code);
 	try_fmt_img->field = V4L2_FIELD_NONE;
-
-	/* TODO(jalv): Initialize try_fmt for the embedded metadata pad */
-	try_fmt_meta->width = MIRA220_EMBEDDED_LINE_WIDTH;
-	try_fmt_meta->height = MIRA220_NUM_EMBEDDED_LINES;
-	try_fmt_meta->code = MEDIA_BUS_FMT_SENSOR_DATA;
-	try_fmt_meta->field = V4L2_FIELD_NONE;
 
 	/* Initialize try_crop rectangle. */
 	try_crop = v4l2_subdev_state_get_crop(fh->state, 0);
@@ -1527,15 +1510,7 @@ static int mira220_enum_frame_size(struct v4l2_subdev *sd,
 		fse->max_width = fse->min_width;
 		fse->min_height = supported_modes[fse->index].height;
 		fse->max_height = fse->min_height;
-	} else {
-		if (fse->code != MEDIA_BUS_FMT_SENSOR_DATA || fse->index > 0)
-			return -EINVAL;
-
-		fse->min_width = MIRA220_EMBEDDED_LINE_WIDTH;
-		fse->max_width = fse->min_width;
-		fse->min_height = MIRA220_NUM_EMBEDDED_LINES;
-		fse->max_height = fse->min_height;
-	}
+	} 
 
 	return 0;
 }
@@ -1559,13 +1534,6 @@ static void mira220_update_image_pad_format(struct mira220 *mira220,
 	mira220_reset_colorspace(&fmt->format);
 }
 
-static void mira220_update_metadata_pad_format(struct v4l2_subdev_format *fmt)
-{
-	fmt->format.width = MIRA220_EMBEDDED_LINE_WIDTH;
-	fmt->format.height = MIRA220_NUM_EMBEDDED_LINES;
-	fmt->format.code = MEDIA_BUS_FMT_SENSOR_DATA;
-	fmt->format.field = V4L2_FIELD_NONE;
-}
 
 static int __mira220_get_pad_format(struct mira220 *mira220,
 				    struct v4l2_subdev_state *sd_state,
@@ -1590,9 +1558,7 @@ static int __mira220_get_pad_format(struct mira220 *mira220,
 			fmt->format.code =
 				mira220_validate_format_code_or_default(
 					mira220, mira220->fmt.code);
-		} else {
-			mira220_update_metadata_pad_format(fmt);
-		}
+		} 
 	}
 
 	return 0;
@@ -1686,10 +1652,7 @@ static int mira220_set_pad_format(struct v4l2_subdev *sd,
 			framefmt = v4l2_subdev_state_get_format(sd_state,
 								fmt->pad);
 			*framefmt = fmt->format;
-		} else {
-			/* Only one embedded data mode is supported */
-			mira220_update_metadata_pad_format(fmt);
-		}
+		} 
 	}
 
 	mutex_unlock(&mira220->mutex);
@@ -2130,53 +2093,6 @@ static void mira220_free_controls(struct mira220 *mira220)
 	mutex_destroy(&mira220->mutex);
 }
 
-static int mira220_check_hwcfg(struct device *dev)
-{
-	struct fwnode_handle *endpoint;
-	struct v4l2_fwnode_endpoint ep_cfg = { .bus_type =
-						       V4L2_MBUS_CSI2_DPHY };
-	int ret = -EINVAL;
-
-	endpoint = fwnode_graph_get_next_endpoint(dev_fwnode(dev), NULL);
-	if (!endpoint) {
-		dev_err(dev, "endpoint node not found\n");
-		return -EINVAL;
-	}
-
-	if (v4l2_fwnode_endpoint_alloc_parse(endpoint, &ep_cfg)) {
-		dev_err(dev, "could not parse endpoint\n");
-		goto error_out;
-	}
-
-	/* Check the number of MIPI CSI2 data lanes */
-	if (ep_cfg.bus.mipi_csi2.num_data_lanes != 2) {
-		dev_err(dev, "only 2 data lanes are currently supported\n");
-		goto error_out;
-	}
-
-	/* Check the link frequency set in device tree */
-	if (!ep_cfg.nr_of_link_frequencies) {
-		dev_err(dev, "link-frequency property not found in DT\n");
-		goto error_out;
-	}
-
-	if (ep_cfg.nr_of_link_frequencies != 1 ||
-	    ep_cfg.link_frequencies[0] != MIRA220_DEFAULT_LINK_FREQ) {
-		dev_err(dev, "Link frequency not supported: %lld\n",
-			ep_cfg.link_frequencies[0]);
-		goto error_out;
-	}
-
-	// TODO(jalv): Check device tree configuration and make sure it is supported by the driver
-	ret = 0;
-
-error_out:
-	v4l2_fwnode_endpoint_free(&ep_cfg);
-	fwnode_handle_put(endpoint);
-
-	return ret;
-}
-
 static int mira220_probe(struct i2c_client *client)
 {
 	struct device *dev = &client->dev;
@@ -2191,10 +2107,6 @@ static int mira220_probe(struct i2c_client *client)
 
 	v4l2_i2c_subdev_init(&mira220->sd, client, &mira220_subdev_ops);
 	mira220->regmap = devm_cci_regmap_init_i2c(client, 16);
-
-	/* Check the hardware configuration in device tree */
-	if (mira220_check_hwcfg(dev))
-		return -EINVAL;
 
 	/* Parse device tree to check if dtoverlay has param skip-reg-upload=1 */
 	/* Set default TBD I2C device address to LED I2C Address*/
@@ -2250,7 +2162,6 @@ static int mira220_probe(struct i2c_client *client)
 
 	/* Initialize source pads */
 	mira220->pad[IMAGE_PAD].flags = MEDIA_PAD_FL_SOURCE;
-	mira220->pad[METADATA_PAD].flags = MEDIA_PAD_FL_SOURCE;
 
 
 	/* Initialize default format */
