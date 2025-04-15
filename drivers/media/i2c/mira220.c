@@ -87,8 +87,7 @@
 #define MIRA220_SUPPORTED_XCLK_FREQ 38400000
 
 // Default exposure is adjusted to mode with smallest height
-#define MIRA220_DEFAULT_EXPOSURE \
-	100 //(MIRA220_MIN_V_SIZE + MIRA220_MIN_VBLANK - MIRA220_GLOB_NUM_CLK_CYCLES / MIRA220_MIN_ROW_LENGTH) //TODO
+#define MIRA220_DEFAULT_EXPOSURE 1000
 #define MIRA220_EXPOSURE_MIN 1
 
 // Power on function timing
@@ -1086,9 +1085,9 @@ static const struct mira220_mode supported_modes[] = {
 		 // ROW_LENGTH is configured by register 0x102B, 0x102C.
 		 .row_length = 304,
 		 .pixel_rate = MIRA220_PIXEL_RATE,
-		 .min_vblank = 20, // ceil(1928 / 300) + 11
-		 .max_vblank = 50000, // ceil(1928 / 300) + 11
-		 .hblank = MIRA220_HBLANK_1600x1400_304, // TODO
+		 .min_vblank = 20,
+		 .max_vblank = 50000,
+		 .hblank = MIRA220_HBLANK_1600x1400_304,
 		 .code = MEDIA_BUS_FMT_SGRBG12_1X12,
 	 },
  
@@ -1292,8 +1291,7 @@ static int mira220_write_exposure_reg(struct mira220 *mira220, u32 exposure)
 		mira220->mode->height, mira220->vblank->val,
 		mira220->mode->row_length);
 	u32 ret = 0;
-	u64 readval = 0;
-	int otherval = 0;
+
 	u32 capped_exposure = exposure;
 
 	if (exposure > max_exposure) {
@@ -2219,9 +2217,10 @@ static const struct dev_pm_ops mira220_pm_ops = {
 		SET_RUNTIME_PM_OPS(mira220_power_off, mira220_power_on, NULL)
 };
 
-static const struct of_device_id mira220_dt_ids[] = { { .compatible =
-								"ams,mira220" },
-						      { /* sentinel */ } };
+static const struct of_device_id mira220_dt_ids[] = {
+								{ .compatible = "ams,mira220" },
+								{ /* sentinel */ }
+							};
 MODULE_DEVICE_TABLE(of, mira220_dt_ids);
 
 static const struct i2c_device_id mira220_ids[] = { { "mira220", 0 }, {} };
@@ -2240,6 +2239,6 @@ static struct i2c_driver mira220_i2c_driver = {
 
 module_i2c_driver(mira220_i2c_driver);
 
-MODULE_AUTHOR("Philippe Baetens <philippebaetens@gmail.com>");
+MODULE_AUTHOR("Philippe Baetens <philippe.baetens@ams-osram.com>");
 MODULE_DESCRIPTION("ams MIRA220 sensor driver");
 MODULE_LICENSE("GPL v2");
