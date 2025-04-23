@@ -22,64 +22,76 @@
 #include <media/v4l2-cci.h>
 #include <linux/unaligned.h>
 
-#include <linux/v4l2-controls.h>
-
-#define MIRA220_NATIVE_WIDTH 1600U
-#define MIRA220_NATIVE_HEIGHT 1400U
-
-#define MIRA220_PIXEL_ARRAY_LEFT 0U
-#define MIRA220_PIXEL_ARRAY_TOP 0U
+/* Active pixel array is 1600 (H) x 1400 (V) pixels. 
+ * Physical resolution including buffer pixels: 1642 (H) x 1464 (V) pixels.
+ */
+#define MIRA220_NATIVE_WIDTH 1642U
+#define MIRA220_NATIVE_HEIGHT 1464U
+#define MIRA220_PIXEL_ARRAY_LEFT 21U
+#define MIRA220_PIXEL_ARRAY_TOP 32U
 #define MIRA220_PIXEL_ARRAY_WIDTH 1600U
 #define MIRA220_PIXEL_ARRAY_HEIGHT 1400U
 
-/* mira220 does not support analog gain. */
+/* Mira220 does not support analog gain. */
 #define MIRA220_ANALOG_GAIN_MIN 1
 #define MIRA220_ANALOG_GAIN_MAX 1
 #define MIRA220_ANALOG_GAIN_STEP 1
 #define MIRA220_ANALOG_GAIN_DEFAULT MIRA220_ANALOG_GAIN_MIN
 
+/* Bit depth */
 #define MIRA220_BIT_DEPTH_REG CCI_REG8(0x209E)
 #define MIRA220_BIT_DEPTH_12_BIT 0x02
 #define MIRA220_BIT_DEPTH_10_BIT 0x04
 #define MIRA220_BIT_DEPTH_8_BIT 0x06
-
 #define MIRA220_CSI_DATA_TYPE_REG CCI_REG8(0x208D)
 #define MIRA220_CSI_DATA_TYPE_12_BIT 0x04
 #define MIRA220_CSI_DATA_TYPE_10_BIT 0x02
 #define MIRA220_CSI_DATA_TYPE_8_BIT 0x01
 
+/* Imager state master/slave registers */
 #define MIRA220_IMAGER_STATE_REG CCI_REG8(0x1003)
 #define MIRA220_IMAGER_STATE_STOP_AT_ROW 0x02
 #define MIRA220_IMAGER_STATE_STOP_AT_FRAME 0x04
 #define MIRA220_IMAGER_STATE_MASTER_CONTROL 0x10
+#define MIRA220_IMAGER_STATE_SLAVE_CONTROL 0x08
 
+/* Start image acquisition */
 #define MIRA220_IMAGER_RUN_REG CCI_REG8(0x10F0)
 #define MIRA220_IMAGER_RUN_START 0x01
 #define MIRA220_IMAGER_RUN_STOP 0x00
 
+/* Continuous running, not limited to nr of frames. */
 #define MIRA220_IMAGER_RUN_CONT_REG CCI_REG8(0x1002)
 #define MIRA220_IMAGER_RUN_CONT_ENABLE 0x04
 #define MIRA220_IMAGER_RUN_CONT_DISABLE 0x00
 
-// Exposure time is indicated in number of rows
+/* Exposure time is indicated in number of rows */
 #define MIRA220_EXP_TIME_REG CCI_REG16_LE(0x100C)
-// VBLANK is indicated in number of rows
+
+/* Vertical Blank */
 #define MIRA220_VBLANK_REG CCI_REG16_LE(0x1012)
 
+/* Horizontal flip */
 #define MIRA220_HFLIP_REG CCI_REG8(0x209C)
 #define MIRA220_HFLIP_ENABLE_MIRROR 1
 #define MIRA220_HFLIP_DISABLE_MIRROR 0
 
+/* Vertical flip */
 #define MIRA220_VFLIP_REG CCI_REG8(0x1095)
 #define MIRA220_VFLIP_ENABLE_FLIP 1
 #define MIRA220_VFLIP_DISABLE_FLIP 0
 
+/* OTP control */
 #define MIRA220_OTP_CMD_REG CCI_REG8(0x0080)
 #define MIRA220_OTP_CMD_UP 0x4
 #define MIRA220_OTP_CMD_DOWN 0x8
 
+/* Global sampling time */
 #define MIRA220_GLOB_NUM_CLK_CYCLES 1928
+
+/* External clock frequency is 38.4 M */
 #define MIRA220_SUPPORTED_XCLK_FREQ 38400000
+
 // Default exposure is adjusted to mode with smallest height
 #define MIRA220_DEFAULT_EXPOSURE 1000
 #define MIRA220_EXPOSURE_MIN 1
@@ -87,20 +99,15 @@
 #define MIRA220_XCLR_MIN_DELAY_US 100000
 #define MIRA220_XCLR_DELAY_RANGE_US 30
 
+/* Pixel rate is an artificial value
+ * This value is used for timing calculations
+ * in combination with vblank/hblank
+ */
 #define MIRA220_PIXEL_RATE 384000000 //384M (x10)
 
-/* Should match device tree link freq */
-#define MIRA220_DEFAULT_LINK_FREQ 750000000
-
-
-#define MIRA220_HBLANK_640x480_120FPS 3860
-#define MIRA220_HBLANK_1600x1400_30FPS 2900
-#define MIRA220_HBLANK_1600x1400_1500 1400
-
-#define MIRA220_HBLANK_400x400_304 2640
-#define MIRA220_HBLANK_640x480_304 2400
 #define MIRA220_HBLANK_1600x1400_304 1440
 
+/* Test Pattern */
 #define MIRA220_REG_TEST_PATTERN CCI_REG8(0x2091)
 #define MIRA220_TEST_PATTERN_DISABLE 0x00
 #define MIRA220_TEST_PATTERN_VERTICAL_GRADIENT 0x01
@@ -1153,20 +1160,10 @@ static int mira220_write_stop_streaming_regs(struct mira220 *mira220)
 {
 	struct i2c_client *const client = v4l2_get_subdevdata(&mira220->sd);
 	int ret = 0;
-	int try_cnt;
 
-	for (try_cnt = 0; try_cnt < 5; try_cnt++) {
-		ret = cci_write(mira220->regmap, MIRA220_IMAGER_STATE_REG,
-				MIRA220_IMAGER_STATE_STOP_AT_ROW, NULL);
-		if (ret) {
-			dev_err(&client->dev,
-				"Error setting stop-at-row imager state at try %d",
-				try_cnt);
-			usleep_range(1000, 1100);
-		} else {
-			break;
-		}
-	}
+	ret = cci_write(mira220->regmap, MIRA220_IMAGER_STATE_REG,
+			MIRA220_IMAGER_STATE_STOP_AT_ROW, NULL);
+
 	if (ret) {
 		dev_err(&client->dev,
 			"Error setting stop-at-row imager state after multiple attempts. Exiting.");
@@ -1187,10 +1184,10 @@ static int mira220_write_stop_streaming_regs(struct mira220 *mira220)
 
 // Returns the maximum exposure time in row_length (reg value).
 // Calculation is baded on Mira220 datasheet Section 9.2.
-static u32 mira220_calculate_max_exposure_time(u32 vsize, u32 vblank,
+static u32 mira220_calculate_max_exposure_time(u32 height, u32 vblank,
 					       u32 row_length)
 {
-	return (vsize + vblank) -
+	return (height + vblank) -
 	       (int)(MIRA220_GLOB_NUM_CLK_CYCLES / row_length);
 }
 
@@ -1225,9 +1222,7 @@ static int mira220_write_exposure_reg(struct mira220 *mira220, u32 exposure)
 // Gets the format code if supported. Otherwise returns the default format code `codes[0]`
 static u32 mira220_validate_format_code_or_default(struct mira220 *mira220,
 						   u32 code)
-{
-	struct i2c_client *client = v4l2_get_subdevdata(&mira220->sd);
-	unsigned int i;
+{	unsigned int i;
 
 	lockdep_assert_held(&mira220->mutex);
 
@@ -1236,11 +1231,6 @@ static u32 mira220_validate_format_code_or_default(struct mira220 *mira220,
 			break;
 
 	if (i >= ARRAY_SIZE(codes)) {
-		dev_err_ratelimited(&client->dev,
-				    "Could not set requested format code %u",
-				    code);
-		dev_err_ratelimited(&client->dev, "Using default format %u",
-				    codes[0]);
 		i = 0;
 	}
 
@@ -1961,7 +1951,6 @@ static int mira220_probe(struct i2c_client *client)
 	struct mira220 *mira220;
 	int ret;
 
-	dev_err(dev, "[MIRA220] name: %s.\n", client->name);
 
 	mira220 = devm_kzalloc(&client->dev, sizeof(*mira220), GFP_KERNEL);
 	if (!mira220)
@@ -1969,9 +1958,6 @@ static int mira220_probe(struct i2c_client *client)
 
 	v4l2_i2c_subdev_init(&mira220->sd, client, &mira220_subdev_ops);
 	mira220->regmap = devm_cci_regmap_init_i2c(client, 16);
-
-	/* Parse device tree to check if dtoverlay has param skip-reg-upload=1 */
-	/* Set default TBD I2C device address to LED I2C Address*/
 
 	/* Get system clock (xclk) */
 	mira220->xclk = devm_clk_get(dev, NULL);
@@ -2084,9 +2070,6 @@ static const struct of_device_id mira220_dt_ids[] = {
 	{ /* sentinel */ } };
 MODULE_DEVICE_TABLE(of, mira220_dt_ids);
 
-static const struct i2c_device_id mira220_ids[] = { { "mira220", 0 }, {} };
-MODULE_DEVICE_TABLE(i2c, mira220_ids);
-
 static struct i2c_driver mira220_i2c_driver = {
 	.driver = {
 		.name = "mira220",
@@ -2095,7 +2078,6 @@ static struct i2c_driver mira220_i2c_driver = {
 	},
 	.probe = mira220_probe,
 	.remove = mira220_remove,
-	.id_table = mira220_ids,
 };
 
 module_i2c_driver(mira220_i2c_driver);
