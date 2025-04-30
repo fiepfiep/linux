@@ -112,8 +112,6 @@
 #define MIRA220_TEST_PATTERN_DISABLE 0x00
 #define MIRA220_TEST_PATTERN_VERTICAL_GRADIENT 0x01
 
-enum pad_types { IMAGE_PAD, NUM_PADS };
-
 struct mira220_reg {
 	u16 address;
 	u8 val;
@@ -1016,11 +1014,31 @@ static const char *const mira220_supply_name[] = {
 
 
 // Mira220 comes in monochrome and RGB variants. This driver implements the RGB variant.
-
-static const u32 codes[] = {
-	MEDIA_BUS_FMT_SGRBG8_1X8,
-	MEDIA_BUS_FMT_SGRBG10_1X10,
+/*
+ * The supported formats.
+ * This table MUST contain 4 entries per format, to cover the various flip
+ * combinations in the order
+ * - no flip
+ * - h flip
+ * - v flip
+ * - h&v flips
+ */
+static const u32 mira220_mbus_formats[] = {
+	MEDIA_BUS_FMT_SRGGB12_1X12,
 	MEDIA_BUS_FMT_SGRBG12_1X12,
+	MEDIA_BUS_FMT_SGBRG12_1X12,
+	MEDIA_BUS_FMT_SBGGR12_1X12,
+
+	MEDIA_BUS_FMT_SRGGB10_1X10,
+	MEDIA_BUS_FMT_SGRBG10_1X10,
+	MEDIA_BUS_FMT_SGBRG10_1X10,
+	MEDIA_BUS_FMT_SBGGR10_1X10,
+
+	MEDIA_BUS_FMT_SRGGB8_1X8,
+	MEDIA_BUS_FMT_SGRBG8_1X8,
+	MEDIA_BUS_FMT_SGBRG8_1X8,
+	MEDIA_BUS_FMT_SBGGR8_1X8,
+
 };
 
 /* Mode configs */
@@ -1046,13 +1064,12 @@ static const struct mira220_mode supported_modes[] = {
 		.min_vblank = 20,
 		.max_vblank = 50000,
 		.hblank = MIRA220_HBLANK_1600x1400_304,
-		.code = MEDIA_BUS_FMT_SGRBG12_1X12,
 	},
 };
 
 struct mira220 {
 	struct v4l2_subdev sd;
-	struct media_pad pad[NUM_PADS];
+	struct media_pad pad;
 
 	struct v4l2_mbus_framefmt fmt;
 
@@ -1221,67 +1238,24 @@ static int mira220_write_exposure_reg(struct mira220 *mira220, u32 exposure)
 	return 0;
 }
 
-// Gets the format code if supported. Otherwise returns the default format code `codes[0]`
-static u32 mira220_validate_format_code_or_default(struct mira220 *mira220,
-						   u32 code)
-{	unsigned int i;
+/* Get bayer order based on flip setting. */
+static u32 mira220_get_format_code(struct mira220 *mira220, u32 code)
+{
+	unsigned int i;
 
-	lockdep_assert_held(&mira220->mutex);
-
-	for (i = 0; i < ARRAY_SIZE(codes); i++)
-		if (codes[i] == code)
+	for (i = 0; i < ARRAY_SIZE(mira220_mbus_formats); i++)
+		if (mira220_mbus_formats[i] == code)
 			break;
 
-	if (i >= ARRAY_SIZE(codes)) {
+	if (i >= ARRAY_SIZE(mira220_mbus_formats))
 		i = 0;
-	}
 
-	return codes[i];
+	i = (i & ~3) | (mira220->vflip->val ? 2 : 0) | (mira220->hflip->val ? 0 : 1);
+
+
+	return mira220_mbus_formats[i];
 }
 
-static void mira220_set_default_format(struct mira220 *mira220)
-{
-	struct v4l2_mbus_framefmt *fmt;
-
-	fmt = &mira220->fmt;
-	fmt->code = supported_modes[0].code;
-	fmt->colorspace = V4L2_COLORSPACE_RAW;
-	fmt->ycbcr_enc = V4L2_MAP_YCBCR_ENC_DEFAULT(fmt->colorspace);
-	fmt->quantization = V4L2_MAP_QUANTIZATION_DEFAULT(true, fmt->colorspace,
-							  fmt->ycbcr_enc);
-	fmt->xfer_func = V4L2_MAP_XFER_FUNC_DEFAULT(fmt->colorspace);
-	fmt->width = supported_modes[0].width;
-	fmt->height = supported_modes[0].height;
-	fmt->field = V4L2_FIELD_NONE;
-}
-
-static int mira220_open(struct v4l2_subdev *sd, struct v4l2_subdev_fh *fh)
-{
-	struct mira220 *mira220 = to_mira220(sd);
-	struct v4l2_mbus_framefmt *try_fmt_img =
-		v4l2_subdev_state_get_format(fh->state, IMAGE_PAD);
-	struct v4l2_rect *try_crop;
-
-	mutex_lock(&mira220->mutex);
-
-	/* Initialize try_fmt for the image pad */
-	try_fmt_img->width = supported_modes[0].width;
-	try_fmt_img->height = supported_modes[0].height;
-	try_fmt_img->code = mira220_validate_format_code_or_default(
-		mira220, supported_modes[0].code);
-	try_fmt_img->field = V4L2_FIELD_NONE;
-
-	/* Initialize try_crop rectangle. */
-	try_crop = v4l2_subdev_state_get_crop(fh->state, 0);
-	try_crop->top = supported_modes[0].crop.top;
-	try_crop->left = supported_modes[0].crop.left;
-	try_crop->width = supported_modes[0].crop.width;
-	try_crop->height = supported_modes[0].crop.height;
-
-	mutex_unlock(&mira220->mutex);
-
-	return 0;
-}
 
 static int mira220_set_ctrl(struct v4l2_ctrl *ctrl)
 {
@@ -1310,6 +1284,7 @@ static int mira220_set_ctrl(struct v4l2_ctrl *ctrl)
 	 * Applying V4L2 control value only happens
 	 * when power is up for streaming
 	 */
+
 	if (pm_runtime_get_if_in_use(&client->dev) == 0) {
 		dev_info(
 			&client->dev,
@@ -1329,11 +1304,12 @@ static int mira220_set_ctrl(struct v4l2_ctrl *ctrl)
 				mira220_test_pattern_val[ctrl->val], NULL);
 		break;
 	case V4L2_CID_HFLIP:
-		ret = cci_write(mira220->regmap, MIRA220_HFLIP_REG, ctrl->val,
-				NULL);
+		ret = cci_write(mira220->regmap, MIRA220_HFLIP_REG, mira220->hflip->val,
+		NULL);
 		break;
+
 	case V4L2_CID_VFLIP:
-		ret = cci_write(mira220->regmap, MIRA220_VFLIP_REG, ctrl->val,
+		ret = cci_write(mira220->regmap, MIRA220_VFLIP_REG, mira220->vflip->val,
 				NULL);
 		break;
 	case V4L2_CID_VBLANK:
@@ -1360,250 +1336,206 @@ static const struct v4l2_ctrl_ops mira220_ctrl_ops = {
 	.s_ctrl = mira220_set_ctrl,
 };
 
+
+static void mira220_update_pad_format(struct mira220 *mira220,
+	const struct mira220_mode *mode,
+	struct v4l2_mbus_framefmt *fmt, u32 code)
+{
+	/* Bayer order varies with flips */
+	fmt->code = mira220_get_format_code(mira220, code);
+	fmt->width = mode->width;
+	fmt->height = mode->height;
+	fmt->field = V4L2_FIELD_NONE;
+	fmt->colorspace = V4L2_COLORSPACE_RAW;
+	fmt->ycbcr_enc = V4L2_YCBCR_ENC_601;
+	fmt->quantization = V4L2_QUANTIZATION_FULL_RANGE;
+	fmt->xfer_func = V4L2_XFER_FUNC_NONE;
+}
+
+static int mira220_set_pad_format(struct v4l2_subdev *sd,
+				  struct v4l2_subdev_state *state,
+				  struct v4l2_subdev_format *fmt)
+{
+	struct mira220 *mira220 = to_mira220(sd);
+	const struct mira220_mode *mode;
+	struct v4l2_mbus_framefmt *format;
+	struct v4l2_rect *crop;
+
+	u32 max_exposure = 0, default_exp = 0;
+
+	// /* Validate format or use default */
+
+
+	mode = v4l2_find_nearest_size(supported_modes,
+				      ARRAY_SIZE(supported_modes), width,
+				      height, fmt->format.width,
+				      fmt->format.height);
+
+	mira220_update_pad_format(mira220, mode, &fmt->format, fmt->format.code);
+
+	format = v4l2_subdev_state_get_format(state, 0);
+	*format = fmt->format;
+
+	crop = v4l2_subdev_state_get_crop(state, 0);
+	crop->width = format->width * 1;
+	crop->height = format->height * 1;
+	crop->left = MIRA220_PIXEL_ARRAY_LEFT;
+	crop->top = MIRA220_PIXEL_ARRAY_TOP;
+
+	if (fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE) {
+		// mira220->fmt = fmt->format;
+		// mira220->mode = mode;
+
+		// Update controls based on new mode (range and current value).
+		max_exposure = mira220_calculate_max_exposure_time(
+			mira220->mode->height, mira220->mode->min_vblank,
+			mira220->mode->row_length);
+		default_exp = (max_exposure < MIRA220_DEFAULT_EXPOSURE) ?
+				      max_exposure :
+				      MIRA220_DEFAULT_EXPOSURE;
+		__v4l2_ctrl_modify_range(mira220->exposure,
+					 MIRA220_EXPOSURE_MIN, max_exposure, 1,
+					 default_exp);
+
+		// Update pixel rate based on new mode.
+		__v4l2_ctrl_modify_range(mira220->pixel_rate,
+					 mira220->mode->pixel_rate,
+					 mira220->mode->pixel_rate, 1,
+					 mira220->mode->pixel_rate);
+
+		// Update hblank based on new mode.
+		__v4l2_ctrl_modify_range(mira220->hblank, mira220->mode->hblank,
+					 mira220->mode->hblank, 1,
+					 mira220->mode->hblank);
+
+		__v4l2_ctrl_modify_range(mira220->vblank,
+					 mira220->mode->min_vblank,
+					 mira220->mode->max_vblank, 1,
+					 mira220->mode->min_vblank);
+
+		__v4l2_ctrl_s_ctrl(mira220->vblank, mira220->mode->min_vblank);
+	}
+
+	return 0;
+}
+
 // This function should enumerate all the media bus formats for the requested pads. If the requested
 // format index is beyond the number of avaialble formats it shall return -EINVAL;
 static int mira220_enum_mbus_code(struct v4l2_subdev *sd,
-				  struct v4l2_subdev_state *sd_state,
+				  struct v4l2_subdev_state *state,
 				  struct v4l2_subdev_mbus_code_enum *code)
 {
 	struct mira220 *mira220 = to_mira220(sd);
 
-	if (code->pad >= NUM_PADS)
+	if (code->index >= (ARRAY_SIZE(mira220_mbus_formats) / 4)) {
 		return -EINVAL;
+	}
 
-	if (code->pad == IMAGE_PAD) {
-		if (code->index >= ARRAY_SIZE(codes))
-			return -EINVAL;
-
-		code->code = mira220_validate_format_code_or_default(
-			mira220, codes[code->index]);
-	} 
+	code->code = mira220_get_format_code(
+		mira220, mira220_mbus_formats[code->index * 4]);
 
 	return 0;
 }
 
 static int mira220_enum_frame_size(struct v4l2_subdev *sd,
-				   struct v4l2_subdev_state *sd_state,
+				   struct v4l2_subdev_state *state,
 				   struct v4l2_subdev_frame_size_enum *fse)
 {
 	struct mira220 *mira220 = to_mira220(sd);
 
-	if (fse->pad >= NUM_PADS)
+	if (fse->index >= ARRAY_SIZE(supported_modes)){
 		return -EINVAL;
-
-	if (fse->index >= ARRAY_SIZE(supported_modes))
-		return -EINVAL;
-
+	}
 	if (fse->code !=
-		mira220_validate_format_code_or_default(mira220, fse->code))
+		mira220_get_format_code(mira220, fse->code)){
 		return -EINVAL;
-
+	}
 	fse->min_width = supported_modes[fse->index].width;
 	fse->max_width = fse->min_width;
 	fse->min_height = supported_modes[fse->index].height;
 	fse->max_height = fse->min_height;
-	
+
 
 	return 0;
 }
 
-static void mira220_reset_colorspace(struct v4l2_mbus_framefmt *fmt)
+static int mira220_init_state(struct v4l2_subdev *sd,
+			      struct v4l2_subdev_state *state)
 {
-	fmt->colorspace = V4L2_COLORSPACE_RAW;
-	fmt->ycbcr_enc = V4L2_MAP_YCBCR_ENC_DEFAULT(fmt->colorspace);
-	fmt->quantization = V4L2_MAP_QUANTIZATION_DEFAULT(true, fmt->colorspace,
-							  fmt->ycbcr_enc);
-	fmt->xfer_func = V4L2_MAP_XFER_FUNC_DEFAULT(fmt->colorspace);
-}
+	struct v4l2_subdev_format fmt = {
+		.which = V4L2_SUBDEV_FORMAT_TRY,
+		.pad = 0,
+		.format = {
+			.code = MEDIA_BUS_FMT_SGRBG12_1X12,
+			.width = supported_modes[0].width,
+			.height = supported_modes[0].height,
+		},
+	};
 
-static void mira220_update_image_pad_format(struct mira220 *mira220,
-					    const struct mira220_mode *mode,
-					    struct v4l2_subdev_format *fmt)
-{
-	fmt->format.width = mode->width;
-	fmt->format.height = mode->height;
-	fmt->format.field = V4L2_FIELD_NONE;
-	mira220_reset_colorspace(&fmt->format);
-}
-
-
-static int __mira220_get_pad_format(struct mira220 *mira220,
-				    struct v4l2_subdev_state *sd_state,
-				    struct v4l2_subdev_format *fmt)
-{
-	if (fmt->pad >= NUM_PADS)
-		return -EINVAL;
-
-	if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
-		struct v4l2_mbus_framefmt *try_fmt =
-			v4l2_subdev_state_get_format(sd_state, fmt->pad);
-
-		try_fmt->code = mira220_validate_format_code_or_default(
-						mira220, try_fmt->code) ;
-		fmt->format = *try_fmt;
-	} else {
-		if (fmt->pad == IMAGE_PAD) {
-			mira220_update_image_pad_format(mira220, mira220->mode,
-							fmt);
-			fmt->format.code =
-				mira220_validate_format_code_or_default(
-					mira220, mira220->fmt.code);
-		}
-	}
+	mira220_set_pad_format(sd, state, &fmt);
 
 	return 0;
 }
 
-static int mira220_get_pad_format(struct v4l2_subdev *sd,
-				  struct v4l2_subdev_state *sd_state,
-				  struct v4l2_subdev_format *fmt)
+
+static int mira220_set_framefmt(struct mira220 *mira220,
+	struct v4l2_subdev_state *state)
 {
-	struct mira220 *mira220 = to_mira220(sd);
-	int ret;
+	const struct v4l2_mbus_framefmt *format;
+	const struct v4l2_rect *crop;
+	int ret = 0;
 
-	mutex_lock(&mira220->mutex);
-	ret = __mira220_get_pad_format(mira220, sd_state, fmt);
-	mutex_unlock(&mira220->mutex);
-
-	return ret;
-}
-
-static int mira220_set_pad_format(struct v4l2_subdev *sd,
-				  struct v4l2_subdev_state *sd_state,
-				  struct v4l2_subdev_format *fmt)
-{
-	struct mira220 *mira220 = to_mira220(sd);
-	const struct mira220_mode *mode;
-	struct v4l2_mbus_framefmt *framefmt;
-	u32 max_exposure = 0, default_exp = 0;
-
-	if (fmt->pad >= NUM_PADS)
-		return -EINVAL;
-
-	mutex_lock(&mira220->mutex);
-
-	if (fmt->pad == IMAGE_PAD) {
-		/* Validate format or use default */
-		fmt->format.code = mira220_validate_format_code_or_default(
-			mira220, fmt->format.code);
-
-		mode = v4l2_find_nearest_size(supported_modes,
-					      ARRAY_SIZE(supported_modes),
-					      width, height, fmt->format.width,
-					      fmt->format.height);
-		mira220_update_image_pad_format(mira220, mode, fmt);
-		if (fmt->which == V4L2_SUBDEV_FORMAT_TRY) {
-			framefmt = v4l2_subdev_state_get_format(sd_state,
-								fmt->pad);
-			*framefmt = fmt->format;
-		} else if (mira220->mode != mode ||
-			   mira220->fmt.code != fmt->format.code) {
-
-
-			mira220->fmt = fmt->format;
-			mira220->mode = mode;
-
-			// Update controls based on new mode (range and current value).
-			max_exposure = mira220_calculate_max_exposure_time(
-				mira220->mode->height,
-				mira220->mode->min_vblank,
-				mira220->mode->row_length);
-			default_exp = (max_exposure < MIRA220_DEFAULT_EXPOSURE) ?
-					      max_exposure :
-					      MIRA220_DEFAULT_EXPOSURE;
-			__v4l2_ctrl_modify_range(mira220->exposure,
-						 MIRA220_EXPOSURE_MIN,
-						 max_exposure, 1, default_exp);
-
-			// Update pixel rate based on new mode.
-			__v4l2_ctrl_modify_range(mira220->pixel_rate,
-						 mira220->mode->pixel_rate,
-						 mira220->mode->pixel_rate, 1,
-						 mira220->mode->pixel_rate);
-
-			// Update hblank based on new mode.
-			__v4l2_ctrl_modify_range(mira220->hblank,
-						 mira220->mode->hblank,
-						 mira220->mode->hblank, 1,
-						 mira220->mode->hblank);
-
-
-			__v4l2_ctrl_modify_range(mira220->vblank,
-						 mira220->mode->min_vblank,
-						 mira220->mode->max_vblank, 1,
-						 mira220->mode->min_vblank);
-
-
-			__v4l2_ctrl_s_ctrl(mira220->vblank,
-					   mira220->mode->min_vblank);
-		}
-	} 
-
-	mutex_unlock(&mira220->mutex);
-
-	return 0;
-}
-
-static int mira220_set_framefmt(struct mira220 *mira220)
-{
-	switch (mira220->fmt.code) {
+	format = v4l2_subdev_state_get_format(state, 0);
+	crop = v4l2_subdev_state_get_crop(state, 0);
+	switch (format->code) {
 	case MEDIA_BUS_FMT_Y8_1X8:
+	case MEDIA_BUS_FMT_SRGGB8_1X8:
 	case MEDIA_BUS_FMT_SGRBG8_1X8:
+	case MEDIA_BUS_FMT_SGBRG8_1X8:
+	case MEDIA_BUS_FMT_SBGGR8_1X8:
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_8_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
 			  MIRA220_CSI_DATA_TYPE_8_BIT, NULL);
-		return 0;
+		break;
 	case MEDIA_BUS_FMT_Y10_1X10:
+	case MEDIA_BUS_FMT_SRGGB10_1X10:
 	case MEDIA_BUS_FMT_SGRBG10_1X10:
+	case MEDIA_BUS_FMT_SGBRG10_1X10:
+	case MEDIA_BUS_FMT_SBGGR10_1X10:
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_10_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
 			  MIRA220_CSI_DATA_TYPE_10_BIT, NULL);
 
-		return 0;
+		break;
 	case MEDIA_BUS_FMT_Y12_1X12:
 	case MEDIA_BUS_FMT_SGRBG12_1X12:
+	case MEDIA_BUS_FMT_SGBRG12_1X12:
+	case MEDIA_BUS_FMT_SBGGR12_1X12:
+	case MEDIA_BUS_FMT_SRGGB12_1X12:
 		cci_write(mira220->regmap, MIRA220_BIT_DEPTH_REG,
 			  MIRA220_BIT_DEPTH_12_BIT, NULL);
 		cci_write(mira220->regmap, MIRA220_CSI_DATA_TYPE_REG,
 			  MIRA220_CSI_DATA_TYPE_12_BIT, NULL);
 
-		return 0;
+		break;
 	default:
+			ret = -EINVAL;
+			break;
 	}
 
-	return -EINVAL;
+	return ret;
 }
 
-static const struct v4l2_rect *
-__mira220_get_pad_crop(struct mira220 *mira220,
-		       struct v4l2_subdev_state *sd_state, unsigned int pad,
-		       enum v4l2_subdev_format_whence which)
-{
-	switch (which) {
-	case V4L2_SUBDEV_FORMAT_TRY:
-		return v4l2_subdev_state_get_crop(sd_state, pad);
-	case V4L2_SUBDEV_FORMAT_ACTIVE:
-		return &mira220->mode->crop;
-	}
-
-	return NULL;
-}
 
 static int mira220_get_selection(struct v4l2_subdev *sd,
-				 struct v4l2_subdev_state *sd_state,
+				 struct v4l2_subdev_state *state,
 				 struct v4l2_subdev_selection *sel)
 {
 	switch (sel->target) {
 	case V4L2_SEL_TGT_CROP: {
-		struct mira220 *mira220 = to_mira220(sd);
-
-		mutex_lock(&mira220->mutex);
-		sel->r = *__mira220_get_pad_crop(mira220, sd_state, sel->pad,
-						 sel->which);
-		mutex_unlock(&mira220->mutex);
-
+		sel->r = *v4l2_subdev_state_get_crop(state, 0);
 		return 0;
 	}
 
@@ -1628,12 +1560,13 @@ static int mira220_get_selection(struct v4l2_subdev *sd,
 	return -EINVAL;
 }
 
-static int mira220_start_streaming(struct mira220 *mira220)
-{
+static int mira220_start_streaming(struct mira220 *mira220,
+	struct v4l2_subdev_state *state){
 	struct i2c_client *client = v4l2_get_subdevdata(&mira220->sd);
 	const struct mira220_reg_list *reg_list;
 	int ret;
 	/* Follow examples of other camera driver, here use pm_runtime_resume_and_get */
+
 	ret = pm_runtime_resume_and_get(&client->dev);
 
 	if (ret < 0) {
@@ -1657,7 +1590,7 @@ static int mira220_start_streaming(struct mira220 *mira220)
 		goto err_rpm_put;
 	}
 
-	ret = mira220_set_framefmt(mira220);
+	ret = mira220_set_framefmt(mira220, state);
 	if (ret) {
 		dev_err(&client->dev, "%s failed to set frame format: %d\n",
 			__func__, ret);
@@ -1674,6 +1607,9 @@ static int mira220_start_streaming(struct mira220 *mira220)
 		dev_err(&client->dev, "Could not write stream-on sequence");
 		goto err_rpm_put;
 	}
+	/* vflip and hflip cannot change during streaming */
+	__v4l2_ctrl_grab(mira220->hflip, true);
+	__v4l2_ctrl_grab(mira220->vflip, true);
 
 	return 0;
 
@@ -1692,36 +1628,25 @@ static void mira220_stop_streaming(struct mira220 *mira220)
 		dev_err(&client->dev,
 			"Could not write the stream-off sequence");
 	}
-
+	__v4l2_ctrl_grab(mira220->hflip, false);
+	__v4l2_ctrl_grab(mira220->vflip, false);
 	pm_runtime_put(&client->dev);
 }
 
 static int mira220_set_stream(struct v4l2_subdev *sd, int enable)
 {
 	struct mira220 *mira220 = to_mira220(sd);
+	struct v4l2_subdev_state *state;
 	int ret = 0;
 
-	mutex_lock(&mira220->mutex);
+	state = v4l2_subdev_lock_and_get_active_state(sd);
 
-	if (enable) {
-		/*
-		 * Apply default & customized values
-		 * and then start streaming.
-		 */
-		ret = mira220_start_streaming(mira220);
-		if (ret)
-			goto err_unlock;
-	} else {
+	if (enable)
+		ret = mira220_start_streaming(mira220, state);
+	else
 		mira220_stop_streaming(mira220);
-	}
 
-	mutex_unlock(&mira220->mutex);
-
-	return ret;
-
-err_unlock:
-	mutex_unlock(&mira220->mutex);
-
+	v4l2_subdev_unlock_state(state);
 	return ret;
 }
 
@@ -1809,7 +1734,7 @@ static const struct v4l2_subdev_video_ops mira220_video_ops = {
 
 static const struct v4l2_subdev_pad_ops mira220_pad_ops = {
 	.enum_mbus_code = mira220_enum_mbus_code,
-	.get_fmt = mira220_get_pad_format,
+	.get_fmt = v4l2_subdev_get_fmt,
 	.set_fmt = mira220_set_pad_format,
 	.get_selection = mira220_get_selection,
 	.enum_frame_size = mira220_enum_frame_size,
@@ -1822,7 +1747,7 @@ static const struct v4l2_subdev_ops mira220_subdev_ops = {
 };
 
 static const struct v4l2_subdev_internal_ops mira220_internal_ops = {
-	.open = mira220_open,
+	.init_state = mira220_init_state,
 };
 
 /* Initialize control handlers */
@@ -1879,10 +1804,14 @@ static int mira220_init_controls(struct mira220 *mira220)
 
 	mira220->hflip = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 					   V4L2_CID_HFLIP, 0, 1, 1, 0);
-
+	if (mira220->hflip)
+		mira220->hflip->flags |= V4L2_CTRL_FLAG_MODIFY_LAYOUT;
+			   
 	mira220->vflip = v4l2_ctrl_new_std(ctrl_hdlr, &mira220_ctrl_ops,
 					   V4L2_CID_VFLIP, 0, 1, 1, 0);
-
+	if (mira220->vflip)
+		mira220->vflip->flags |= V4L2_CTRL_FLAG_MODIFY_LAYOUT;
+			   
 	v4l2_ctrl_new_std_menu_items(ctrl_hdlr, &mira220_ctrl_ops,
 				     V4L2_CID_TEST_PATTERN,
 				     ARRAY_SIZE(mira220_test_pattern_menu) - 1,
@@ -1927,21 +1856,23 @@ static int mira220_probe(struct i2c_client *client)
 	struct mira220 *mira220;
 	int ret;
 
-
 	mira220 = devm_kzalloc(&client->dev, sizeof(*mira220), GFP_KERNEL);
 	if (!mira220)
 		return -ENOMEM;
 
 	v4l2_i2c_subdev_init(&mira220->sd, client, &mira220_subdev_ops);
-	mira220->regmap = devm_cci_regmap_init_i2c(client, 16);
+	mira220->sd.internal_ops = &mira220_internal_ops;
 
+	mira220->regmap = devm_cci_regmap_init_i2c(client, 16);
+	if (IS_ERR(mira220->regmap))
+		return dev_err_probe(dev, PTR_ERR(mira220->regmap),
+				     "failed to initialize CCI\n");
 	/* Get system clock (xclk) */
 	mira220->xclk = devm_clk_get(dev, NULL);
 	if (IS_ERR(mira220->xclk)) {
 		dev_err(dev, "failed to get xclk\n");
 		return PTR_ERR(mira220->xclk);
 	}
-
 	mira220->xclk_freq = clk_get_rate(mira220->xclk);
 	if (mira220->xclk_freq != MIRA220_SUPPORTED_XCLK_FREQ) {
 		dev_err(dev, "xclk frequency not supported: %d Hz\n",
@@ -1984,23 +1915,28 @@ static int mira220_probe(struct i2c_client *client)
 	mira220->sd.entity.function = MEDIA_ENT_F_CAM_SENSOR;
 
 	/* Initialize source pads */
-	mira220->pad[IMAGE_PAD].flags = MEDIA_PAD_FL_SOURCE;
+	mira220->pad.flags = MEDIA_PAD_FL_SOURCE;
 
 
-	/* Initialize default format */
-	mira220_set_default_format(mira220);
 
-	ret = media_entity_pads_init(&mira220->sd.entity, NUM_PADS,
-				     mira220->pad);
+	ret = media_entity_pads_init(&mira220->sd.entity, 1, &mira220->pad);
 	if (ret) {
-		dev_err(dev, "failed to init entity pads: %d\n", ret);
+		dev_err_probe(dev, ret, "failed to init entity pads\n");
 		goto error_handler_free;
+	}
+
+	mira220->sd.state_lock = mira220->ctrl_handler.lock;
+	ret = v4l2_subdev_init_finalize(&mira220->sd);
+	if (ret < 0) {
+		dev_err_probe(dev, ret, "subdev init error\n");
+		goto error_media_entity;
 	}
 
 	ret = v4l2_async_register_subdev_sensor(&mira220->sd);
 	if (ret < 0) {
-		dev_err(dev, "failed to register sensor sub-device: %d\n", ret);
-		goto error_media_entity;
+		dev_err_probe(dev, ret,
+			      "failed to register sensor sub-device\n");
+		goto error_subdev_cleanup;
 	}
 
 	/* Enable runtime PM and turn off the device */
@@ -2009,6 +1945,9 @@ static int mira220_probe(struct i2c_client *client)
 	pm_runtime_idle(dev);
 
 	return 0;
+
+error_subdev_cleanup:
+	v4l2_subdev_cleanup(&mira220->sd);
 
 error_media_entity:
 	media_entity_cleanup(&mira220->sd.entity);
