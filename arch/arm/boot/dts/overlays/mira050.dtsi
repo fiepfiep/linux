@@ -1,8 +1,8 @@
-// Fragment that configures an mira220
+// Fragment that configures an mira050
 
-cam_node: mira220@10 {
-	compatible = "ams,mira220";
-	reg = <0x36>;
+cam_node: mira050@10 {
+	compatible = "ams,mira050";
+	reg = <0x54>;
 	status = "disabled";
 
 	clocks = <&cam1_clk>;
@@ -19,7 +19,7 @@ cam_node: mira220@10 {
 		cam_endpoint: endpoint {
 			clock-lanes = <0>;
 			data-lanes = <1 2>;
-			clock-noncontinuous;
+			// clock-noncontinuous;
 			link-frequencies =
 				/bits/ 64 <750000000>;
 		};
