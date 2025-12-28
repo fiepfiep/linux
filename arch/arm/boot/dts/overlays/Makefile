@@ -190,6 +190,7 @@ dtbo-$(CONFIG_ARCH_BCM2835) += \
 	miniuart-bt.dtbo \
 	mipi-dbi-spi.dtbo \
 	mira220.dtbo \
+	mira016.dtbo \
 	mlx90640.dtbo \
 	mmc.dtbo \
 	mz61581.dtbo \
