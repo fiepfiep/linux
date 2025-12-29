@@ -3029,9 +3029,8 @@ struct mira016_mode
 static const char *const mira016_supply_name[] = {
 	// TODO(jalv): Check supply names
 	/* Supplies can be enabled in any order */
-	"vana", /* Analog (2.8V) supply */
-	"vdig", /* Digital Core (1.8V) supply */
-	"vddl", /* IF (1.2V) supply */
+	"vdd28", /*  Analog supply, 2.8 volts */
+	"vdd11", /* Digital supply, 1.1 volts */
 };
 
 #define MIRA016_NUM_SUPPLIES ARRAY_SIZE(mira016_supply_name)

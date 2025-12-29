@@ -4,16 +4,9 @@ cam_node: mira016@10 {
 	compatible = "ams,mira016";
 	reg = <0x36>;
 	status = "disabled";
-
 	clocks = <&cam1_clk>;
-	clock-names = "xclk";
-
-	mira016_vana = <&cam1_reg>;	/* 2.8v */
-	mira016_vdig = <&cam_dummy_reg>;	/* 1.8v */
-	mira016_vddl = <&cam_dummy_reg>;	/* 1.2v */
-
-	rotation = <0>;
-	orientation = <2>;
+	vdd28-supply = <&cam1_reg>;	/* 1.8v */
+	vdd11-supply = <&cam_dummy_reg>;	/* 1.2v */
 
 	port {
 		cam_endpoint: endpoint {
